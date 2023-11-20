@@ -70,7 +70,6 @@ void packet_handler(unsigned char *user_data, const struct pcap_pkthdr *pkthdr, 
 
     // Call the Ethernet analysis function
     analyze_ethernet(packet);
-    fprintf(output_file, "Packet length: %d\n", pkthdr->len);
     for (bpf_u_int32 i = 0; i < pkthdr->len; i++) {
         fprintf(output_file, "%02x ", packet[i]);
         if (i !=0 && i % 16 == 0) {
