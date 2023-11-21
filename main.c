@@ -41,7 +41,8 @@ int main(int argc, char *argv[]) {
         start_packet_capture(argv[1]);
     }
     else {
-        fprintf(stderr, "Usage: %s <device>\nExemple: sudo ./packet_analyzer wlp0s20f3\n\n", argv[0]);
+        fprintf(stderr, "Invalid number of arguments\n");
+        fprintf(stderr, "Usage: %s <interface> or %s\nExemple: sudo ./packet_analyzer wlp0s20f3\n", argv[0], argv[0]);
         exit(EXIT_FAILURE);
     }
 

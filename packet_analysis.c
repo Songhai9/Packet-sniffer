@@ -1,6 +1,7 @@
 #include "packet_analysis.h"
 #include <stdio.h>
 #include <arpa/inet.h>  // Ajoutez cette ligne
+#include <netinet/tcp.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
