@@ -37,7 +37,7 @@ const char* get_ethertype_description(uint16_t ethertype) {
 }
 
 
-void analyze_ethernet(const unsigned char *packet) {
+void analyze_ethernet(const unsigned char *packet, long unsigned int length) {
     struct ether_header *eth_header = (struct ether_header *) packet;
 
     // Conversion des adresses MAC en chaînes de caractères pour un affichage lisible
@@ -58,6 +58,9 @@ void analyze_ethernet(const unsigned char *packet) {
     switch (ntohs(eth_header->ether_type)) {
         case ETHERTYPE_IP:
             analyze_ip(packet + sizeof(struct ether_header), ntohs(eth_header->ether_type));
+            break;
+        case ETHERTYPE_ARP:
+            analyze_arp(packet + sizeof(struct ether_header), length - sizeof(struct ether_header));
             break;
         // Ajouter d'autres cas pour d'autres types de protocoles Ethernet si nécessaire
     }
