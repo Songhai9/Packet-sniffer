@@ -6,6 +6,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Fonction pour convertir un nombre hexidécimal en décimal
+int hex_to_decimal(const char *hex) {
+    int len = strlen(hex);
+    int base = 1;
+    int dec_val = 0;
+    for (int i=len-1; i>=0; i--) {
+        if (hex[i] >= '0' && hex[i] <= '9') {
+            dec_val += (hex[i] - 48) * base;
+            base = base * 16;
+        }
+        else if (hex[i] >= 'A' && hex[i] <= 'F') {
+            dec_val += (hex[i] - 55) * base;
+            base = base*16;
+        }
+    }
+    return dec_val;
+}
+
 char* get_ethertype_name(uint16_t type) {
     switch (type) {
         case ETHERTYPE_IP: return "IPv4";
@@ -52,7 +70,8 @@ void analyze_ethernet(const unsigned char *packet, long unsigned int length) {
     printf("Ethernet Frame:\n");
     printf("   Destination MAC: %s\n", dest_mac);
     printf("   Source MAC: %s\n", src_mac);
-    printf("   Type: %s\n", get_ethertype_description(ntohs(eth_header->ether_type)));
+    int type = hex_to_decimal(get_ethertype_description(ntohs(eth_header->ether_type)));
+    printf("   Type: %d\n", type);
 
     // Continuer l'analyse en fonction du type de protocole Ethernet
     switch (ntohs(eth_header->ether_type)) {

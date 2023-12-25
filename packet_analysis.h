@@ -9,6 +9,9 @@
 #include <netinet/tcp.h>
 #include <arpa/inet.h>        // For inet_ntoa()
 
+// Fonction pour convertir un nombre hexidécimal en décimal
+int hex_to_decimal(const char hex[]);
+
 // Fonctions pour analyser la couche Ethernet
 const char* get_ethertype_description(uint16_t ethertype);
 void analyze_ethernet(const unsigned char *packet, long unsigned int length);
