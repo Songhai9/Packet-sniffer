@@ -1,20 +1,31 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 LIBS = -lpcap
+OBJDIR = obj
+BINDIR = bin
+SRCDIR = src
+INCDIR = include
 
-all: packet_analyzer
+_OBJS = main.o packet_capture.o ethernet.o ip.o arp.o tcp.o udp.o
+OBJS = $(patsubst %,$(OBJDIR)/%,$(_OBJS))
 
-packet_analyzer: main.o packet_capture.o packet_analysis.o
+all: directories $(BINDIR)/packet_analyzer
+
+directories: $(OBJDIR) $(BINDIR)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(BINDIR):
+	mkdir -p $(BINDIR)
+
+$(BINDIR)/packet_analyzer: $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
-main.o: main.c packet_capture.h
-	$(CC) $(CFLAGS) -c $<
-
-packet_capture.o: packet_capture.c packet_capture.h
-	$(CC) $(CFLAGS) -c $< 
-
-packet_analysis.o: packet_analysis.c packet_analysis.h
-	$(CC) $(CFLAGS) -c $< 
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
 
 clean:
-	rm -f *.o packet_analyzer *.txt
+	rm -rf $(OBJDIR) $(BINDIR) *.txt
+
+.PHONY: all clean directories
