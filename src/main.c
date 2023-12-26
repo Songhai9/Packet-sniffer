@@ -5,9 +5,31 @@
 #include "../include/tcp.h"
 #include "../include/udp.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
-    if (argc == 1) {
+
+    char *interface = NULL;
+    char *input_file = NULL;
+    int opt;
+
+    while ((opt = getopt(argc, argv, "i:o:")) != -1) {
+        switch (opt) {
+            case 'i':
+                interface = optarg;
+                break;
+            case 'o':
+                input_file = optarg;
+                break;
+            default: /* '?' */
+                fprintf(stderr, "Usage: %s -i <interface>\n", argv[0]);
+                exit(EXIT_FAILURE);
+        }
+    }
+
+    if (interface == NULL && input_file == NULL) {
         // Exemple de trame
         uint8_t trame_ip[] = {
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
@@ -74,15 +96,17 @@ int main(int argc, char *argv[]) {
             printf("\n");
         }
     }
-    else if (argc == 2) {
-        start_packet_capture(argv[1]);
+    else if (interface != NULL){
+        start_packet_capture(interface);
+    }
+    else if (input_file != NULL){
+        printf("Not implemented yet\n");
     }
     else {
         fprintf(stderr, "Invalid number of arguments\n");
-        fprintf(stderr, "Usage: %s <interface> or %s\nExemple: sudo ./packet_analyzer wlp0s20f3\n", argv[0], argv[0]);
+        fprintf(stderr, "Usage: %s [-i] <interface> or %s [-o] <output_file>\nExemple: sudo ./packet_analyzer wlp0s20f3\n", argv[0], argv[0]);
         exit(EXIT_FAILURE);
     }
-
     
 
     return 0;
