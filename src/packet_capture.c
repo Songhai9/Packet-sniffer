@@ -6,8 +6,11 @@
 
 FILE *output_file;
 
-void open_output_file() {
-    output_file = fopen("../trames.txt", "w");
+void open_output_file(const char *filename) {
+    if (filename == NULL) 
+        filename = "../trames.txt";
+    
+    output_file = fopen(filename, "w");
     if (!output_file) {
         perror("Error opening output file");
         exit(EXIT_FAILURE);
@@ -32,7 +35,7 @@ void start_packet_capture(char *device) {
     }
 
     // Open the output file
-    open_output_file();
+    // open_output_file();
 
     signal(SIGINT, handle_sigint);
 

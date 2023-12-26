@@ -8,11 +8,16 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <pcap.h>
 
 int main(int argc, char *argv[]) {
 
     char *interface = NULL;
     char *input_file = NULL;
+    pcap_t *handle;
+    char errbuf[PCAP_ERRBUF_SIZE];
+    // struct pcap_pkthdr header;
+    // const unsigned char *packet;
     int opt;
 
     while ((opt = getopt(argc, argv, "i:o:")) != -1) {
@@ -28,6 +33,8 @@ int main(int argc, char *argv[]) {
                 exit(EXIT_FAILURE);
         }
     }
+    
+    open_output_file(NULL);
 
     if (interface == NULL && input_file == NULL) {
         // Exemple de trame
@@ -100,7 +107,13 @@ int main(int argc, char *argv[]) {
         start_packet_capture(interface);
     }
     else if (input_file != NULL){
-        printf("Not implemented yet\n");
+        handle = pcap_open_offline(input_file, errbuf);
+        if (handle == NULL) {
+            fprintf(stderr, "Couldn't open file %s: %s\n", input_file, errbuf);
+            exit(EXIT_FAILURE);
+        }
+        pcap_loop(handle, 0, packet_handler, NULL);
+        pcap_close(handle);
     }
     else {
         fprintf(stderr, "Invalid number of arguments\n");
@@ -108,6 +121,6 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     
-
+    close_output_file();
     return 0;
 }
