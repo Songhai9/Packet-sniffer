@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <netinet/if_ether.h>
 
+extern int verbose_level;
+
 // Fonction pour obtenir une description lisible du type de protocole Ethernet
 const char* get_ethertype_description(uint16_t ethertype) {
     switch (ethertype) {
@@ -27,10 +29,17 @@ void analyze_ethernet(const unsigned char *packet, long unsigned int length) {
              eth_header->ether_dhost[0], eth_header->ether_dhost[1], eth_header->ether_dhost[2],
              eth_header->ether_dhost[3], eth_header->ether_dhost[4], eth_header->ether_dhost[5]);
 
-    printf("Ethernet Frame:\n");
-    printf("   Destination MAC: %s\n", dest_mac);
-    printf("   Source MAC: %s\n", src_mac);
-    printf("   Type: %s\n", get_ethertype_description(ntohs(eth_header->ether_type)));
+    if (verbose_level == 1)
+        printf("Ethernet | ");
+    else if (verbose_level == 2) {
+        printf("Ethernet Header: Destination MAC : %s | Source MAC : %s\n", dest_mac, src_mac);
+    }
+    else {
+        printf("Ethernet Header:\n");
+        printf("    |-Mac MAC: %s\n", dest_mac);
+        printf("    |-Mac MAC: %s\n", src_mac);
+        printf("    |-Protocol: %s\n", get_ethertype_description(ntohs(eth_header->ether_type)));
+    }
 
     // Continuer l'analyse en fonction du type de protocole Ethernet
     switch (ntohs(eth_header->ether_type)) {

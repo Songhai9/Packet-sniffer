@@ -10,6 +10,8 @@
 #include <string.h>
 #include <pcap.h>
 
+int verbose_level = 3;
+
 int main(int argc, char *argv[]) {
 
     char *interface = NULL;
@@ -20,13 +22,20 @@ int main(int argc, char *argv[]) {
     // const unsigned char *packet;
     int opt;
 
-    while ((opt = getopt(argc, argv, "i:o:")) != -1) {
+    while ((opt = getopt(argc, argv, "i:o:v:")) != -1) {
         switch (opt) {
             case 'i':
                 interface = optarg;
                 break;
             case 'o':
                 input_file = optarg;
+                break;
+            case 'v':
+                verbose_level = atoi(optarg);
+                if (verbose_level < 1 || verbose_level > 3) {
+                    fprintf(stderr, "Invalid verbosity level\n");
+                    exit(EXIT_FAILURE);
+                }
                 break;
             default: /* '?' */
                 fprintf(stderr, "Usage: %s -i <interface>\n", argv[0]);

@@ -27,7 +27,7 @@ ANALYSIS
     - [] IMAP
 
 OPTIONS
-- [] -i
-- [] -o 
+- [x] -i ✅
+- [x] -o ✅
 - [] -f
-- [] -v
+- [x] -v ✅
