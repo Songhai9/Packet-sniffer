@@ -12,10 +12,10 @@ ANALYSIS
     - [x] UDP ✅
     - [x] TCP ✅
     - [x] ARP ✅
-    - [] ICMP 
+    - [x] ICMP ✅
 --> APPLICATIONS
     - [] DHCP
-    - [] DNS
+    - [x] DNS 🟥
     - [] HTTP
     - [] FTP
     - [] SMTP
@@ -31,3 +31,37 @@ OPTIONS
 - [x] -o ✅
 - [] -f
 - [x] -v ✅
+
+
+Structure :
+
+analyseur-reseau/
+│
+├── src/                  # Dossier contenant les fichiers source (.c)
+│   ├── main.c            # Point d'entrée principal, gestion des arguments
+│   ├── ethernet.c        # Gestion des trames Ethernet
+│   ├── ip.c              # Gestion du protocole IP
+│   ├── arp.c             # Gestion du protocole ARP
+│   ├── icmp.c            # Gestion du protocole ICMP
+│   ├── tcp.c             # Gestion du protocole TCP
+│   ├── udp.c             # Gestion du protocole UDP
+│   └── protocols_applicatifs/
+│       ├── dhcp.c        # Gestion du protocole DHCP
+│       ├── dns.c         # Gestion du protocole DNS
+│       ├── http.c        # Gestion du protocole HTTP
+│       └── ...
+│
+├── include/              # Dossier contenant les fichiers d'en-tête (.h)
+│   ├── ethernet.h
+│   ├── ip.h
+│   ├── arp.h
+│   ├── icmp.h
+│   ├── tcp.h
+│   ├── udp.h
+│   └── protocols_applicatifs/
+│       ├── dhcp.h
+│       ├── dns.h
+│       ├── http.h
+│       └── ...
+│
+└── Makefile              # Makefile pour la compilation
