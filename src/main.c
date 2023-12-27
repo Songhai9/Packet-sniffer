@@ -47,6 +47,29 @@ int main(int argc, char *argv[]) {
 
     if (interface == NULL && input_file == NULL) {
         // Exemple de trame
+        // Exemple de trame ICMP (Echo Request)
+        uint8_t trame_icmp[] = {
+            // En-tête Ethernet
+            0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
+            0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
+            0x08, 0x00,                         // Type Ethernet (0x0800 pour IP)
+            // En-tête IP
+            0x45, 0x00, 0x00, 0x54, 0x00, 0x00, 0x40, 0x00, // Version, IHL, Type de service, Longueur totale, Identifiant, Drapeaux, Fragment Offset
+            0x40, 0x01, 0xa6, 0x82, // TTL, Protocole (ICMP), Checksum
+            0xc0, 0xa8, 0x01, 0x02, // Adresse IP source
+            0xc0, 0xa8, 0x01, 0x01, // Adresse IP destination
+            // En-tête ICMP (Echo Request)
+            0x08, 0x00, // Type et Code (8 pour Echo Request)
+            0xf7, 0xff, // Checksum
+            0x00, 0x01, // Identifiant
+            0x00, 0x01, // Numéro de séquence
+            // Données ICMP (optionnel)
+            0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68,
+            0x69, 0x6a, 0x6b, 0x6c, 0x6d, 0x6e, 0x6f, 0x70,
+            0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x61,
+            0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69
+        };
+
         uint8_t trame_ip[] = {
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
             0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
@@ -105,8 +128,8 @@ int main(int argc, char *argv[]) {
         };
 
        // Déclarer un tableau contenant les trames, puis les analyser
-        const uint8_t *trames[] = {trame_ip, trame_udp,trame_arp};
-        for (int i = 0; i < 3; i++) {
+        const uint8_t *trames[] = {trame_ip, trame_udp,trame_arp, trame_icmp};
+        for (int i = 0; i < 4; i++) {
             printf("Trame %d:\n", i + 1);
             analyze_ethernet(trames[i], sizeof(trame_ip));
             printf("\n");

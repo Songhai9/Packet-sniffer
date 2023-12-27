@@ -1,6 +1,7 @@
 #include "../include/ip.h"
 #include "../include/tcp.h"
 #include "../include/udp.h"
+#include "../include/icmp.h"
 #include <netinet/ip.h>
 #include <stdio.h>
 #include <arpa/inet.h>
@@ -59,5 +60,8 @@ void analyze_ip(const unsigned char *packet, unsigned int length) {
     }
     if (ip_header->protocol == IPPROTO_UDP) {
         analyze_udp(packet + ip_header->ihl * 4);
+    }
+    if (ip_header->protocol == IPPROTO_ICMP) {
+        analyze_icmp(packet + ip_header->ihl * 4, length - ip_header->ihl * 4);
     }
 }
