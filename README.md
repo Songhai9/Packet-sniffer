@@ -15,7 +15,7 @@ ANALYSIS
     - [x] ICMP ✅
 --> APPLICATIONS
     - [] DHCP
-    - [x] DNS 🟥
+    - [x] DNS ✅
     - [] HTTP
     - [] FTP
     - [] SMTP

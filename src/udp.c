@@ -26,5 +26,5 @@ void analyze_udp(const unsigned char *packet) {
 
     if (src_port == 53 || dest_port == 53) {
         analyze_dns(packet + sizeof(struct udphdr), ntohs(udp_header->len) - sizeof(struct udphdr));
-    }
+    }   
 }

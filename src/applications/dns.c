@@ -1,34 +1,36 @@
-// dns.c
-
 #include "../include/applications/dns.h"
 #include <stdio.h>
-#include <arpa/inet.h>
+#include <arpa/inet.h>  // Pour ntohs et ntohl
 
 extern int verbose_level;
 
 void analyze_dns(const unsigned char *packet, unsigned int length) {
-    const struct dns_header *dns = (struct dns_header *)packet;
-
-    if (length < sizeof(struct dns_header)) {
+    if (length < sizeof(dns_header_t)) {
         printf("Truncated DNS packet\n");
         return;
     }
 
-    if (verbose_level == 1) {
+    const dns_header_t *dns_hdr = (const dns_header_t *)packet;
+
+    if (verbose_level == 1)
         printf("DNS | ");
-    } 
     else if (verbose_level == 2) {
-        printf("DNS: ID : %d | Number questions : %d | Number answers %d", ntohs(dns->id),
-         ntohs(dns->qdcount), ntohs(dns->ancount));
-    } 
-    else {
-        printf("DNS Packet:\n");
-        printf("    |- ID: %d\n", ntohs(dns->id));
-        printf("    |- Flags: 0x%04x\n", ntohs(dns->flags));
-        printf("    |- Number questions: %d\n", ntohs(dns->qdcount));
-        printf("    |- Number answers: %d\n", ntohs(dns->ancount));
-        printf("    |- Authority RRs: %d\n", ntohs(dns->nscount));
-        printf("    |- Additional RRs: %d\n", ntohs(dns->arcount));
+        printf("DNS Header : ID : %d | Questions : %d | Answer RRs : %d \n", ntohs(dns_hdr->id),
+          ntohs(dns_hdr->qdcount), ntohs(dns_hdr->ancount));
     }
-        
+    else {
+        printf("DNS Header:\n");
+        printf("    |- ID: %u\n", ntohs(dns_hdr->id));
+        printf("    |- Flags: %u\n", ntohs(dns_hdr->flags));
+        printf("    |- Questions: %u\n", ntohs(dns_hdr->qdcount));
+        printf("    |- Answer RRs: %u\n", ntohs(dns_hdr->ancount));
+        printf("    |- Authority RRs: %u\n", ntohs(dns_hdr->nscount));
+        printf("    |- Additional RRs: %u\n", ntohs(dns_hdr->arcount));
+    }
+
+    // Ici, vous pouvez ajouter une logique pour analyser les questions et les réponses
+    // ...
 }
+
+// Autres fonctions pour traiter les questions et les réponses DNS
+// ...

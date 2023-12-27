@@ -38,7 +38,9 @@ void analyze_tcp(const unsigned char *packet, int length) {
     }
 
     if (src_port == 53 || dest_port == 53) {
-        analyze_dns(packet + tcp_header->doff * 4, length - tcp_header->doff * 4);
+        analyze_dns(packet + sizeof(struct tcphdr), length - sizeof(struct tcphdr));
     }
+
+    
 
 }
