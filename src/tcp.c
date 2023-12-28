@@ -1,5 +1,6 @@
 #include "../include/tcp.h"
 #include "../include/applications/dns.h"
+#include "../include/applications/http.h"
 #include <netinet/ip.h>
 #include <stdio.h>
 #include <arpa/inet.h>
@@ -39,6 +40,14 @@ void analyze_tcp(const unsigned char *packet, int length) {
 
     if (src_port == 53 || dest_port == 53) {
         analyze_dns(packet + sizeof(struct tcphdr), length - sizeof(struct tcphdr));
+    }
+
+    if (src_port == 80 || dest_port == 80) {
+        // La charge utile commence après l'en-tête TCP
+        const unsigned char *http_payload = packet + (tcp_header->doff * 4);
+        int http_payload_length = length - (tcp_header->doff * 4);
+        
+        analyze_http(http_payload, http_payload_length);
     }
 
     

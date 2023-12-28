@@ -1,5 +1,6 @@
 #include "../include/udp.h"
 #include "../include/applications/dns.h"
+#include "../include/applications/http.h"
 #include <stdio.h>
 #include <arpa/inet.h>
 #include <netinet/udp.h>
@@ -26,5 +27,14 @@ void analyze_udp(const unsigned char *packet) {
 
     if (src_port == 53 || dest_port == 53) {
         analyze_dns(packet + sizeof(struct udphdr), ntohs(udp_header->len) - sizeof(struct udphdr));
-    }   
+    }
+
+    // Supposons que src_port et dest_port ont été extraits de l'en-tête UDP
+    if (src_port == 80 || dest_port == 80) {
+        // La charge utile commence après l'en-tête UDP
+        const unsigned char *http_payload = packet + sizeof(struct udphdr);
+        unsigned int http_payload_length = ntohs(udp_header->len) - sizeof(struct udphdr);
+        
+        analyze_http(http_payload, http_payload_length);
+    }
 }

@@ -16,7 +16,7 @@ ANALYSIS
 --> APPLICATIONS
     - [] DHCP
     - [x] DNS ✅
-    - [] HTTP
+    - [x] HTTP ✅
     - [] FTP
     - [] SMTP
     - [] NAT
