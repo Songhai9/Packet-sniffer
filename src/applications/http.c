@@ -10,6 +10,28 @@ static void parse_http_request(const uint8_t *packet, http_request_t *request);
 static void parse_http_response(const uint8_t *packet, http_response_t *response);
 static void print_http_body(const uint8_t *body, size_t body_length);
 
+ const char *http_methods[] = {
+    "GET",
+    "POST",
+    "HEAD",
+    "PUT",
+    "DELETE",
+    "CONNECT",
+    "OPTIONS",
+    "TRACE",
+    "PATCH",
+    NULL
+};
+
+int is_http_method(const char *str) {
+    for (int i = 0; http_methods[i] != NULL; i++) {
+        if (strcmp(str, http_methods[i]) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void analyze_http(const uint8_t *packet, unsigned int length) {
     // Vérifier si la taille de la charge utile est suffisante pour contenir une requête ou une réponse HTTP
     if (length < 8) {
@@ -34,42 +56,43 @@ void analyze_http(const uint8_t *packet, unsigned int length) {
     else if (verbose_level == 3) {
         // Vérifier si c'est une requête ou une réponse (par exemple en cherchant "HTTP" suivi d'un espace et d'une version)
         if (strncmp((const char *)packet, "HTTP", 4) != 0) {
-            
-            printf("HTTP Request : \n");
-            // C'est probablement une requête HTTP
             http_request_t request;
             parse_http_request(packet, &request);
-            printf("    |- Request Method: %s\n", request.method);
-            printf("    |- Request URI: %s\n", request.uri);
-            printf("    |- HTTP Version: %s\n", request.version);
-            printf("    |- Headers:\n%s\n", request.headers);
 
-            // Trouver et afficher le corps du message HTTP si présent
-            const char *body_start = strstr((const char *)packet, "\r\n\r\n");
-            if (body_start) {
-                body_start += 4; // Passer la ligne blanche
-                const char *content_length_str = strstr((const char *)packet, "Content-Length: ");
-                size_t body_length = 0;
-                
-                if (content_length_str) {
-                    content_length_str += strlen("Content-Length: ");
-                    body_length = strtol(content_length_str, NULL, 10);
+            // Vérifier si la méthode HTTP est connue
+            if (is_http_method(request.method)) {
+                printf("HTTP Request : \n");
+                printf("    |- Request Method: %s\n", request.method);
+                printf("    |- Request URI: %s\n", request.uri);
+                printf("    |- HTTP Version: %s\n", request.version);
+                printf("    |- Headers:\n%s\n", request.headers);
+
+                // Trouver et afficher le corps du message HTTP si présent
+                const char *body_start = strstr((const char *)packet, "\r\n\r\n");
+                if (body_start) {
+                    body_start += 4; // Passer la ligne blanche
+                    const char *content_length_str = strstr((const char *)packet, "Content-Length: ");
+                    size_t body_length = 0;
+                    
+                    if (content_length_str) {
+                        content_length_str += strlen("Content-Length: ");
+                        body_length = strtol(content_length_str, NULL, 10);
+                    }
+
+                    // Assurez-vous que la longueur du corps ne dépasse pas la longueur de la trame restante
+                    size_t remaining_length = length - (body_start - (const char *)packet);
+                    if (body_length > remaining_length) {
+                        body_length = remaining_length;
+                    }
+
+                    print_http_body((const uint8_t *)body_start, body_length);
                 }
-
-                // Assurez-vous que la longueur du corps ne dépasse pas la longueur de la trame restante
-                size_t remaining_length = length - (body_start - (const char *)packet);
-                if (body_length > remaining_length) {
-                    body_length = remaining_length;
-                }
-
-                print_http_body((const uint8_t *)body_start, body_length);
             }
-
         } else {
-            // C'est probablement une réponse HTTP
-            printf("HTTP Response : \n");
             http_response_t response;
             parse_http_response(packet, &response);
+
+            printf("HTTP Response : \n");
             printf("    |- HTTP Version: %s\n", response.version);
             printf("    |- Status Code: %s\n", response.status_code);
             printf("    |- Reason Phrase: %s\n", response.reason_phrase);
