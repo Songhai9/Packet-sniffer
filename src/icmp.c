@@ -22,6 +22,5 @@ void analyze_icmp(const unsigned char *packet, unsigned int length) {
         printf("    |- Type: %d\n", icmp_header->type);
         printf("    |- Code: %d\n", icmp_header->code);
         printf("    |- Checksum: 0x%04x\n", ntohs(icmp_header->checksum));
-        // Ajouter plus de détails si nécessaire
     }
 }

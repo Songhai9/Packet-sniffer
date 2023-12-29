@@ -12,7 +12,6 @@ const char* get_ethertype_description(uint16_t ethertype) {
         case ETHERTYPE_IP: return "IPv4 (0x0800)";
         case ETHERTYPE_IPV6: return "IPv6 (0x86DD)";
         case ETHERTYPE_ARP: return "ARP (0x0806)";
-        // Ajouter d'autres cas si nécessaire
         default: return "Unknown";
     }
 }
@@ -49,6 +48,5 @@ void analyze_ethernet(const unsigned char *packet, long unsigned int length) {
         case ETHERTYPE_ARP:
             analyze_arp(packet + sizeof(struct ether_header), length - sizeof(struct ether_header));
             break;
-        // Ajouter d'autres cas pour d'autres types de protocoles Ethernet si nécessaire
     }
 }

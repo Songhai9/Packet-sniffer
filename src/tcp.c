@@ -1,6 +1,8 @@
 #include "../include/tcp.h"
 #include "../include/applications/dns.h"
 #include "../include/applications/http.h"
+#include "../include/applications/ftp.h"
+#include "../include/applications/smtp.h"
 #include <netinet/ip.h>
 #include <stdio.h>
 #include <arpa/inet.h>
@@ -48,6 +50,20 @@ void analyze_tcp(const unsigned char *packet, int length) {
         int http_payload_length = length - (tcp_header->doff * 4);
         
         analyze_http(http_payload, http_payload_length);
+    }
+
+    if (src_port == 21 || dest_port == 21) {
+        // Le paquet est potentiellement un paquet FTP
+        // Transmettez les données au-delà de l'en-tête TCP à analyze_ftp
+        analyze_ftp(packet + sizeof(struct tcphdr), length - sizeof(struct tcphdr));
+    }
+
+    if (src_port == 25 || dest_port == 25) {
+        // La charge utile commence après l'en-tête TCP
+        const unsigned char *smtp_payload = packet + (tcp_header->doff * 4);
+        int smtp_payload_length = length - (tcp_header->doff * 4);
+        
+        analyze_smtp(smtp_payload, smtp_payload_length);
     }
 
     

@@ -146,10 +146,59 @@ int main(int argc, char *argv[]) {
             0x72, 0x6c, 0x64, 0x21
         };
 
+        uint8_t trame_ftp[] = {
+            // En-tête Ethernet
+            0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
+            0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
+            0x08, 0x00,                         // Type Ethernet (0x0800 pour IP)
+            // En-tête IP (simplifiée, les valeurs spécifiques ne sont pas critiques pour cet exemple)
+            0x45, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x40, 0x00, // Version, IHL, Type de service, Longueur totale
+            0x40, 0x06, 0x00, 0x00, // TTL, Protocole (TCP), Checksum (non calculé)
+            0xc0, 0xa8, 0x01, 0x02, // Adresse IP source
+            0xc0, 0xa8, 0x01, 0x01, // Adresse IP destination
+            // En-tête TCP (simplifiée, les valeurs spécifiques ne sont pas critiques pour cet exemple)
+            0x00, 0x15, 0x00, 0x00, // Ports source et destination (port 21 pour FTP)
+            0x00, 0x00, 0x00, 0x00, // Numéro de séquence
+            0x00, 0x00, 0x00, 0x00, // Numéro d'acquittement
+            0x50, 0x02, 0x20, 0x00, // Taille de l'en-tête, Flags, Fenêtre
+            0x00, 0x00, 0x00, 0x00, // Checksum (non calculé), Pointeur urgent
+            // Données TCP représentant une commande FTP
+            0x55, 0x53, 0x45, 0x52, 0x20, // 'USER '
+            0x61, 0x6E, 0x6F, 0x6E, 0x79, 0x6D, 0x6F, 0x75, 0x73, // 'anonymous'
+            0x0D, 0x0A  // '\r\n'
+
+        };
+
+        uint8_t trame_smtp[] = {
+            // En-tête Ethernet
+            0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
+            0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
+            0x08, 0x00,                         // Type Ethernet (0x0800 pour IP)
+            // En-tête IP (simplifiée, les valeurs spécifiques ne sont pas critiques pour cet exemple)
+            0x45, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x40, 0x00, // Version, IHL, Type de service, Longueur totale
+            0x40, 0x06, 0x00, 0x00, // TTL, Protocole (TCP), Checksum (non calculé)
+            0xc0, 0xa8, 0x01, 0x02, // Adresse IP source
+            0xc0, 0xa8, 0x01, 0x01, // Adresse IP destination
+            // En-tête TCP (simplifiée, les valeurs spécifiques ne sont pas critiques pour cet exemple)
+            0x00, 0x19, 0x00, 0x00, // Ports source et destination (port 25 pour SMTP)
+            0x00, 0x00, 0x00, 0x00, // Numéro de séquence
+            0x00, 0x00, 0x00, 0x00, // Numéro d'acquittement
+            0x50, 0x02, 0x20, 0x00, // Taille de l'en-tête, Flags, Fenêtre
+            0x00, 0x00, 0x00, 0x00, // Checksum (non calculé), Pointeur urgent
+            // Données TCP représentant une commande SMTP
+            'H', 'E', 'L', 'O', ' ', 'e', 'x', 'a',
+            'm', 'p', 'l', 'e', '.', 'c', 'o', 'm',
+            '\r', '\n'
+        };
+
+
+
+
 
        // Déclarer un tableau contenant les trames, puis les analyser
-        const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http};
-        for (int i = 0; i < 5; i++) {
+        const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http, trame_ftp
+        , trame_smtp};
+        for (int i = 0; i < 7; i++) {
             printf("Trame %d:\n", i + 1);
             analyze_ethernet(trames[i], sizeof(trame_ip));
             printf("\n");

@@ -35,6 +35,7 @@ void analyze_http(const uint8_t *packet, unsigned int length) {
         // Vérifier si c'est une requête ou une réponse (par exemple en cherchant "HTTP" suivi d'un espace et d'une version)
         if (strncmp((const char *)packet, "HTTP", 4) != 0) {
             
+            printf("HTTP Request : \n");
             // C'est probablement une requête HTTP
             http_request_t request;
             parse_http_request(packet, &request);
@@ -66,6 +67,7 @@ void analyze_http(const uint8_t *packet, unsigned int length) {
 
         } else {
             // C'est probablement une réponse HTTP
+            printf("HTTP Response : \n");
             http_response_t response;
             parse_http_response(packet, &response);
             printf("    |- HTTP Version: %s\n", response.version);

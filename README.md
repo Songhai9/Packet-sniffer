@@ -17,8 +17,8 @@ ANALYSIS
     - [] DHCP
     - [x] DNS ✅
     - [x] HTTP ✅
-    - [] FTP
-    - [] SMTP
+    - [x] FTP ✅
+    - [x] SMTP ✅
     - [] NAT
     - [] SCTP
     - [] Telnet
