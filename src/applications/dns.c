@@ -27,10 +27,4 @@ void analyze_dns(const unsigned char *packet, unsigned int length) {
         printf("    |- Authority RRs: %u\n", ntohs(dns_hdr->nscount));
         printf("    |- Additional RRs: %u\n", ntohs(dns_hdr->arcount));
     }
-
-    // Ici, vous pouvez ajouter une logique pour analyser les questions et les réponses
-    // ...
 }
-
-// Autres fonctions pour traiter les questions et les réponses DNS
-// ...
