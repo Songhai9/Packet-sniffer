@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     {
         // Exemple de trame
         // Exemple de trame ICMP (Echo Request)
-        /* uint8_t trame_icmp[] = {
+        uint8_t trame_icmp[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
             0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
@@ -288,7 +288,7 @@ int main(int argc, char *argv[])
             0x01, 0x03, 0x04, 0x0e, 0x63, 0x6e, 0x3d, 0x61, // Suite de l'opération
             0x64, 0x6d, 0x69, 0x6e, 0x80, 0x05, 0x73, 0x65, // Suite de l'opération
             0x63, 0x72, 0x65, 0x74                          // Fin de l'opération (mot de passe 'secret')
-        };*/
+        };
 
         uint8_t trame_telnet[] = {
             // En-tête Ethernet
@@ -314,17 +314,15 @@ int main(int argc, char *argv[])
         };
 
         // Déclarer un tableau contenant les trames, puis les analyser
-        /*const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http,
+        const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http,
                                    trame_ftp, trame_smtp, trame_pop, trame_imap, trame_sctp,
-                                     trame_ldap, trame_telnet};
+                                   trame_ldap, trame_telnet};
         for (int i = 0; i < 12; i++)
         {
             printf("Trame %d:\n", i + 1);
             analyze_ethernet(trames[i], sizeof(trame_ip));
             printf("\n");
-        }*/
-
-        analyze_ethernet(trame_telnet, sizeof(trame_telnet));
+        }
     }
     else if (interface != NULL)
     {
