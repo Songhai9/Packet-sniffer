@@ -5,6 +5,7 @@
 #include "../include/applications/smtp.h"
 #include "../include/applications/pop.h"
 #include "../include/applications/imap.h"
+#include "../include/applications/ldap.h"
 #include <netinet/ip.h>
 #include <stdio.h>
 #include <arpa/inet.h>
@@ -89,5 +90,13 @@ void analyze_tcp(const unsigned char *packet, int length)
         int imap_payload_length = length - (tcp_header->doff * 4);
 
         analyze_imap(imap_payload, imap_payload_length);
+    }
+
+    if (src_port == 389 || dest_port == 389)
+    {
+        const unsigned char *ldap_payload = packet + (tcp_header->doff * 4);
+        int ldap_payload_length = length - (tcp_header->doff * 4);
+
+        analyze_ldap(ldap_payload, ldap_payload_length);
     }
 }

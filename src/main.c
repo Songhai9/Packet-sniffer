@@ -237,9 +237,63 @@ int main(int argc, char *argv[])
             0x54, 0x41, 0x52, 0x54, 0x54, 0x4C, 0x53, 0x20, 0x41, 0x55, 0x54, 0x48, 0x3D, 0x50, 0x4C, 0x41,
             0x49, 0x4E, 0x5D, 0x20, 0x4C, 0x6F, 0x67, 0x67, 0x65, 0x64, 0x20, 0x69, 0x6E, 0x0D, 0x0A};
 
+        uint8_t trame_sctp[] = {
+            // En-tête Ethernet
+            0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
+            0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
+            0x08, 0x00,                         // Type Ethernet (0x0800 pour IP)
+
+            // En-tête IP
+            0x45, 0x00, 0x00, 0x3c, 0x12, 0x34, 0x40, 0x00, // Version, IHL, Type de service, Longueur totale, Identifiant, Drapeaux, Fragment Offset
+            0x40, 0x84, 0x00, 0x00,                         // TTL, Protocole (SCTP), Checksum
+            0xc0, 0xa8, 0x01, 0x02,                         // Adresse IP source
+            0xc0, 0xa8, 0x01, 0x01,                         // Adresse IP destination
+
+            // En-tête SCTP
+            0x1a, 0x2b, 0x3c, 0x4d, // Source Port
+            0x4d, 0x3c, 0x2b, 0x1a, // Destination Port
+            0xde, 0xad, 0xbe, 0xef, // Verification Tag
+            0x00, 0x00, 0x00, 0x00, // Checksum (à calculer)
+
+            // Chunk SCTP (exemple avec un chunk DATA)
+            0x00,       // Chunk Type: DATA
+            0x03,       // Chunk Flags
+            0x00, 0x14, // Chunk Length
+            // Données du Chunk DATA (exemple simple)
+            0x00, 0x01, 0x00, 0x00, // TSN
+            0x00, 0x00, 0x00, 0x01, // Stream Identifier
+            0x00, 0x00, 0x00, 0x00, // Stream Sequence Number
+            0x00, 0x00, 0x00, 0x00  // Payload Protocol Identifier
+        };
+
+        uint8_t trame_ldap[] = {
+            // En-tête Ethernet
+            0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
+            0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
+            0x08, 0x00,                         // Type Ethernet (0x0800 pour IP)
+            // En-tête IP (simplifiée, les valeurs spécifiques ne sont pas critiques pour cet exemple)
+            0x45, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x40, 0x00, // Version, IHL, Type de service, Longueur totale
+            0x40, 0x06, 0x00, 0x00,                         // TTL, Protocole (TCP), Checksum (non calculé)
+            0xc0, 0xa8, 0x01, 0x02,                         // Adresse IP source
+            0xc0, 0xa8, 0x01, 0x01,                         // Adresse IP destination
+            // En-tête TCP (simplifiée, les valeurs spécifiques ne sont pas critiques pour cet exemple)
+            0x01, 0x85, 0x01, 0x85, // Ports source et destination (port 389 pour LDAP)
+            0x00, 0x00, 0x00, 0x00, // Numéro de séquence
+            0x00, 0x00, 0x00, 0x00, // Numéro d'acquittement
+            0x50, 0x02, 0x20, 0x00, // Taille de l'en-tête, Flags, Fenêtre
+            0x00, 0x00, 0x00, 0x00, // Checksum (non calculé), Pointeur urgent
+            // Données TCP représentant une opération LDAP (BIND request)
+            // Note : Ceci est un exemple simplifié et les valeurs spécifiques ne sont pas dérivées d'une réelle opération LDAP
+            0x30, 0x1c, 0x02, 0x01, 0x01, 0x60, 0x17, 0x02, // Début de l'opération LDAP (BIND request)
+            0x01, 0x03, 0x04, 0x0e, 0x63, 0x6e, 0x3d, 0x61, // Suite de l'opération
+            0x64, 0x6d, 0x69, 0x6e, 0x80, 0x05, 0x73, 0x65, // Suite de l'opération
+            0x63, 0x72, 0x65, 0x74                          // Fin de l'opération (mot de passe 'secret')
+        };
+
         // Déclarer un tableau contenant les trames, puis les analyser
-        const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http, trame_ftp, trame_smtp, trame_pop, trame_imap};
-        for (int i = 0; i < 9; i++)
+        const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http,
+                                   trame_ftp, trame_smtp, trame_pop, trame_imap, trame_sctp, trame_ldap};
+        for (int i = 0; i < 11; i++)
         {
             printf("Trame %d:\n", i + 1);
             analyze_ethernet(trames[i], sizeof(trame_ip));

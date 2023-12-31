@@ -19,12 +19,11 @@ ANALYSIS
     - [x] HTTP ✅
     - [x] FTP ✅
     - [x] SMTP ✅
-    - [] NAT
     - [] SCTP
     - [] Telnet
-    - [] LDAP
-    - [] POP
-    - [] IMAP
+    - [x] LDAP
+    - [x] POP ✅
+    - [x] IMAP ✅
 
 OPTIONS
 - [x] -i ✅
