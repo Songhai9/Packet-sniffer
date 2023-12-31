@@ -3,9 +3,10 @@
 
 #include <stdint.h>
 
-typedef struct {
-    int code;          // Le code de réponse SMTP
-    const char *desc;  // La description associée
+typedef struct
+{
+    int code;         // Le code de réponse SMTP
+    const char *desc; // La description associée
 } smtp_response;
 
 // Prototype de la fonction d'analyse SMTP

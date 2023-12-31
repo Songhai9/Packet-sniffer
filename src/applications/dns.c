@@ -1,11 +1,13 @@
 #include "../include/applications/dns.h"
 #include <stdio.h>
-#include <arpa/inet.h>  // Pour ntohs et ntohl
+#include <arpa/inet.h> // Pour ntohs et ntohl
 
 extern int verbose_level;
 
-void analyze_dns(const unsigned char *packet, unsigned int length) {
-    if (length < sizeof(dns_header_t)) {
+void analyze_dns(const unsigned char *packet, unsigned int length)
+{
+    if (length < sizeof(dns_header_t))
+    {
         printf("Truncated DNS packet\n");
         return;
     }
@@ -14,11 +16,13 @@ void analyze_dns(const unsigned char *packet, unsigned int length) {
 
     if (verbose_level == 1)
         printf("DNS | ");
-    else if (verbose_level == 2) {
+    else if (verbose_level == 2)
+    {
         printf("DNS Header : ID : %d | Questions : %d | Answer RRs : %d \n", ntohs(dns_hdr->id),
-          ntohs(dns_hdr->qdcount), ntohs(dns_hdr->ancount));
+               ntohs(dns_hdr->qdcount), ntohs(dns_hdr->ancount));
     }
-    else {
+    else
+    {
         printf("DNS Header:\n");
         printf("    |- ID: %u\n", ntohs(dns_hdr->id));
         printf("    |- Flags: %u\n", ntohs(dns_hdr->flags));

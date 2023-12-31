@@ -8,17 +8,24 @@
 
 extern int verbose_level;
 
-char* get_ip_protocol_name(uint8_t protocol) {
-    switch (protocol) {
-        case IPPROTO_TCP: return "TCP";
-        case IPPROTO_UDP: return "UDP";
-        case IPPROTO_ICMP: return "ICMP";
-        // Ajoutez d'autres protocoles IP si nécessaire
-        default: return "Unknown";
+char *get_ip_protocol_name(uint8_t protocol)
+{
+    switch (protocol)
+    {
+    case IPPROTO_TCP:
+        return "TCP";
+    case IPPROTO_UDP:
+        return "UDP";
+    case IPPROTO_ICMP:
+        return "ICMP";
+    // Ajoutez d'autres protocoles IP si nécessaire
+    default:
+        return "Unknown";
     }
 }
 
-void analyze_ip(const unsigned char *packet, unsigned int length) {
+void analyze_ip(const unsigned char *packet, unsigned int length)
+{
     const struct iphdr *ip_header = (struct iphdr *)packet;
 
     char source[INET_ADDRSTRLEN];
@@ -30,7 +37,8 @@ void analyze_ip(const unsigned char *packet, unsigned int length) {
         printf("IP | ");
     else if (verbose_level == 2)
         printf("IP Header : IP Version : %d | Protocol : %s | Source IP : %s | Destination IP : %s\n", ip_header->version, get_ip_protocol_name(ip_header->protocol), source, dest);
-    else {
+    else
+    {
         printf("IP Header:\n");
         printf("    |- IP Version: %d\n", ip_header->version);
         printf("    |- IP Header Length: %d bytes\n", ip_header->ihl * 4);
@@ -50,18 +58,22 @@ void analyze_ip(const unsigned char *packet, unsigned int length) {
     }
 
     // Gérer les options IP si elles sont présentes
-    if (ip_header->ihl > 5) {
+    if (ip_header->ihl > 5)
+    {
         printf("IP Options: Present\n");
         // Traiter les options ici si nécessaire
     }
 
-    if (ip_header->protocol == IPPROTO_TCP) {
+    if (ip_header->protocol == IPPROTO_TCP)
+    {
         analyze_tcp(packet + ip_header->ihl * 4, length - ip_header->ihl * 4);
     }
-    if (ip_header->protocol == IPPROTO_UDP) {
+    if (ip_header->protocol == IPPROTO_UDP)
+    {
         analyze_udp(packet + ip_header->ihl * 4);
     }
-    if (ip_header->protocol == IPPROTO_ICMP) {
+    if (ip_header->protocol == IPPROTO_ICMP)
+    {
         analyze_icmp(packet + ip_header->ihl * 4, length - ip_header->ihl * 4);
     }
 }

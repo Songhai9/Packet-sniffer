@@ -7,17 +7,24 @@
 extern int verbose_level;
 
 // Fonction pour obtenir une description lisible du type de protocole Ethernet
-const char* get_ethertype_description(uint16_t ethertype) {
-    switch (ethertype) {
-        case ETHERTYPE_IP: return "IPv4 (0x0800)";
-        case ETHERTYPE_IPV6: return "IPv6 (0x86DD)";
-        case ETHERTYPE_ARP: return "ARP (0x0806)";
-        default: return "Unknown";
+const char *get_ethertype_description(uint16_t ethertype)
+{
+    switch (ethertype)
+    {
+    case ETHERTYPE_IP:
+        return "IPv4 (0x0800)";
+    case ETHERTYPE_IPV6:
+        return "IPv6 (0x86DD)";
+    case ETHERTYPE_ARP:
+        return "ARP (0x0806)";
+    default:
+        return "Unknown";
     }
 }
 
-void analyze_ethernet(const unsigned char *packet, long unsigned int length) {
-    struct ether_header *eth_header = (struct ether_header *) packet;
+void analyze_ethernet(const unsigned char *packet, long unsigned int length)
+{
+    struct ether_header *eth_header = (struct ether_header *)packet;
 
     // Conversion des adresses MAC en chaînes de caractères pour un affichage lisible
     char src_mac[18], dest_mac[18];
@@ -30,10 +37,12 @@ void analyze_ethernet(const unsigned char *packet, long unsigned int length) {
 
     if (verbose_level == 1)
         printf("Ethernet | ");
-    else if (verbose_level == 2) {
+    else if (verbose_level == 2)
+    {
         printf("Ethernet Header: Destination MAC : %s | Source MAC : %s\n", dest_mac, src_mac);
     }
-    else {
+    else
+    {
         printf("Ethernet Header:\n");
         printf("    |-Mac MAC: %s\n", dest_mac);
         printf("    |-Mac MAC: %s\n", src_mac);
@@ -41,12 +50,13 @@ void analyze_ethernet(const unsigned char *packet, long unsigned int length) {
     }
 
     // Continuer l'analyse en fonction du type de protocole Ethernet
-    switch (ntohs(eth_header->ether_type)) {
-        case ETHERTYPE_IP:
-            analyze_ip(packet + sizeof(struct ether_header), ntohs(eth_header->ether_type));
-            break;
-        case ETHERTYPE_ARP:
-            analyze_arp(packet + sizeof(struct ether_header), length - sizeof(struct ether_header));
-            break;
+    switch (ntohs(eth_header->ether_type))
+    {
+    case ETHERTYPE_IP:
+        analyze_ip(packet + sizeof(struct ether_header), ntohs(eth_header->ether_type));
+        break;
+    case ETHERTYPE_ARP:
+        analyze_arp(packet + sizeof(struct ether_header), length - sizeof(struct ether_header));
+        break;
     }
 }

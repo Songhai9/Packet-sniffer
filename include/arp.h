@@ -4,4 +4,3 @@
 void analyze_arp(const unsigned char *packet, long unsigned int length);
 
 #endif // ARP_H
-    
