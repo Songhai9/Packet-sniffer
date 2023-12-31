@@ -6,6 +6,7 @@
 #include "../include/applications/pop.h"
 #include "../include/applications/imap.h"
 #include "../include/applications/ldap.h"
+#include "../include/applications/telnet.h"
 #include <netinet/ip.h>
 #include <stdio.h>
 #include <arpa/inet.h>
@@ -98,5 +99,13 @@ void analyze_tcp(const unsigned char *packet, int length)
         int ldap_payload_length = length - (tcp_header->doff * 4);
 
         analyze_ldap(ldap_payload, ldap_payload_length);
+    }
+
+    if (src_port == 23 || dest_port == 23)
+    {
+        const unsigned char *telnet_payload = packet + (tcp_header->doff * 4);
+        int telnet_payload_length = length - (tcp_header->doff * 4);
+
+        analyze_telnet(telnet_payload, telnet_payload_length);
     }
 }

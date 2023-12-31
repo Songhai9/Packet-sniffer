@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     {
         // Exemple de trame
         // Exemple de trame ICMP (Echo Request)
-        uint8_t trame_icmp[] = {
+        /* uint8_t trame_icmp[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
             0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
@@ -288,17 +288,43 @@ int main(int argc, char *argv[])
             0x01, 0x03, 0x04, 0x0e, 0x63, 0x6e, 0x3d, 0x61, // Suite de l'opération
             0x64, 0x6d, 0x69, 0x6e, 0x80, 0x05, 0x73, 0x65, // Suite de l'opération
             0x63, 0x72, 0x65, 0x74                          // Fin de l'opération (mot de passe 'secret')
+        };*/
+
+        uint8_t trame_telnet[] = {
+            // En-tête Ethernet
+            0x00, 0x1b, 0xc0, 0x03, 0xdf, 0x1e, // Adresse MAC destination
+            0x00, 0x19, 0x8c, 0x02, 0xaf, 0x10, // Adresse MAC source
+            0x08, 0x00,                         // Type Ethernet (0x0800 pour IP)
+            // En-tête IP (simplifiée)
+            0x45, 0x00, 0x00, 0x3c, 0x00, 0x01, 0x40, 0x00, // Version, IHL, Type de service, Longueur totale
+            0x40, 0x06, 0x00, 0x00,                         // TTL, Protocole (TCP), Checksum (non calculé)
+            0xc0, 0xa8, 0x01, 0x03,                         // Adresse IP source
+            0xc0, 0xa8, 0x01, 0x04,                         // Adresse IP destination
+            // En-tête TCP (simplifiée)
+            0x00, 0x17, 0x00, 0x17, // Ports source et destination (port 23 pour Telnet)
+            0x00, 0x00, 0x00, 0x00, // Numéro de séquence
+            0x00, 0x00, 0x00, 0x00, // Numéro d'acquittement
+            0x50, 0x02, 0x20, 0x00, // Taille de l'en-tête, Flags, Fenêtre
+            0x00, 0x00, 0x00, 0x00, // Checksum (non calculé), Pointeur urgent
+            // Données Telnet
+            0xFF, 0xFB, 0x03,             // IAC, WILL, SUPPRESS GO AHEAD (commande Telnet)
+            0x42, 0x6F, 0x6E, 0x6A, 0x6F, // "Bonjo"
+            0xFF, 0xFE, 0x18,             // IAC, DON'T, LOGOUT (commande Telnet)
+            0x75, 0x72                    // "ur"
         };
 
         // Déclarer un tableau contenant les trames, puis les analyser
-        const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http,
-                                   trame_ftp, trame_smtp, trame_pop, trame_imap, trame_sctp, trame_ldap};
-        for (int i = 0; i < 11; i++)
+        /*const uint8_t *trames[] = {trame_ip, trame_udp_dns, trame_arp, trame_icmp, trame_http,
+                                   trame_ftp, trame_smtp, trame_pop, trame_imap, trame_sctp,
+                                     trame_ldap, trame_telnet};
+        for (int i = 0; i < 12; i++)
         {
             printf("Trame %d:\n", i + 1);
             analyze_ethernet(trames[i], sizeof(trame_ip));
             printf("\n");
-        }
+        }*/
+
+        analyze_ethernet(trame_telnet, sizeof(trame_telnet));
     }
     else if (interface != NULL)
     {
