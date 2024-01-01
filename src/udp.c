@@ -1,6 +1,7 @@
 #include "../include/udp.h"
 #include "../include/applications/dns.h"
 #include "../include/applications/http.h"
+#include "../include/applications/bootp.h"
 #include <stdio.h>
 #include <arpa/inet.h>
 #include <netinet/udp.h>
@@ -40,5 +41,21 @@ void analyze_udp(const unsigned char *packet)
         unsigned int http_payload_length = ntohs(udp_header->len) - sizeof(struct udphdr);
 
         analyze_http(http_payload, http_payload_length);
+    }
+
+    if (src_port == 67 || dest_port == 67)
+    {
+        const unsigned char *bootp_payload = packet + sizeof(struct udphdr);
+        unsigned int bootp_payload_length = ntohs(udp_header->len) - sizeof(struct udphdr);
+
+        analyze_bootp_dhcp(bootp_payload, bootp_payload_length);
+    }
+
+    if (src_port == 68 || dest_port == 68)
+    {
+        const unsigned char *bootp_payload = packet + sizeof(struct udphdr);
+        unsigned int bootp_payload_length = ntohs(udp_header->len) - sizeof(struct udphdr);
+
+        analyze_bootp_dhcp(bootp_payload, bootp_payload_length);
     }
 }
