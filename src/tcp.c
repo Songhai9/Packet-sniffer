@@ -23,12 +23,12 @@ void analyze_tcp(const unsigned char *packet, int length)
     uint16_t dest_port = ntohs(tcp_header->dest);
 
     if (verbose_level == 1)
-        printf("TCP | ");
+        printf("| TCP ");
     else if (verbose_level == 2)
         printf("TCP Header : Source Port : %d | Destination Port : %d\n", ntohs(tcp_header->source), ntohs(tcp_header->dest));
     else
     {
-        printf("TCP Segment:\n");
+        printf("****************** TCP Segment ******************\n");
         printf("    |- Source Port: %d\n", src_port);
         printf("    |- Destination Port: %d\n", dest_port);
         printf("    |- Sequence Number: %u\n", ntohl(tcp_header->seq));

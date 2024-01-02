@@ -69,7 +69,7 @@ void analyze_ftp(const unsigned char *packet, unsigned int length)
     }
 
     if (verbose_level == 1)
-        printf("FTP | ");
+        printf("| FTP");
     else
     {
         if (contains_ftp_command(buffer))

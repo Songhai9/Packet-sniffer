@@ -13,7 +13,7 @@ void analyze_imap(const unsigned char *packet, unsigned int length)
     buffer[length] = '\0';
 
     if (verbose_level == 1)
-        printf("IMAP | ");
+        printf("| IMAP ");
     else
     {
         // Analyse des commandes et réponses IMAP

@@ -15,7 +15,7 @@ void analyze_dns(const unsigned char *packet, unsigned int length)
     const dns_header_t *dns_hdr = (const dns_header_t *)packet;
 
     if (verbose_level == 1)
-        printf("DNS | ");
+        printf("| DNS ");
     else if (verbose_level == 2)
     {
         printf("DNS Header : ID : %d | Questions : %d | Answer RRs : %d \n", ntohs(dns_hdr->id),
@@ -23,7 +23,7 @@ void analyze_dns(const unsigned char *packet, unsigned int length)
     }
     else
     {
-        printf("DNS Header:\n");
+        printf("****************** DNS Header ******************\n");
         printf("    |- ID: %u\n", ntohs(dns_hdr->id));
         printf("    |- Flags: %u\n", ntohs(dns_hdr->flags));
         printf("    |- Questions: %u\n", ntohs(dns_hdr->qdcount));

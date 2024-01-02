@@ -17,7 +17,7 @@ void analyze_icmp(const unsigned char *packet, unsigned int length)
 
     if (verbose_level == 1)
     {
-        printf("ICMP | ");
+        printf("| ICMP ");
     }
     else if (verbose_level == 2)
     {
@@ -25,7 +25,7 @@ void analyze_icmp(const unsigned char *packet, unsigned int length)
     }
     else
     {
-        printf("ICMP Packet:\n");
+        printf("****************** ICMP Packet ******************\n");
         printf("    |- Type: %d\n", icmp_header->type);
         printf("    |- Code: %d\n", icmp_header->code);
         printf("    |- Checksum: 0x%04x\n", ntohs(icmp_header->checksum));

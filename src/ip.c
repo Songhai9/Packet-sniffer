@@ -36,12 +36,12 @@ void analyze_ip(const unsigned char *packet, unsigned int length)
     inet_ntop(AF_INET, &(ip_header->daddr), dest, INET_ADDRSTRLEN);
 
     if (verbose_level == 1)
-        printf("IP | ");
+        printf("| IP ");
     else if (verbose_level == 2)
         printf("IP Header : IP Version : %d | Protocol : %s | Source IP : %s | Destination IP : %s\n", ip_header->version, get_ip_protocol_name(ip_header->protocol), source, dest);
     else
     {
-        printf("IP Header:\n");
+        printf("****************** IP Header ******************\n");
         printf("    |- IP Version: %d\n", ip_header->version);
         printf("    |- IP Header Length: %d bytes\n", ip_header->ihl * 4);
         printf("    |- Type of Service: %d\n", ip_header->tos);

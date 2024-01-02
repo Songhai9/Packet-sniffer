@@ -16,12 +16,12 @@ void analyze_udp(const unsigned char *packet)
     uint16_t dest_port = ntohs(udp_header->dest);
 
     if (verbose_level == 1)
-        printf("UDP | ");
+        printf("| UDP ");
     else if (verbose_level == 2)
         printf("UDP Header : Source Port : %d | Destination Port : %d | Length: %d\n", ntohs(udp_header->source), ntohs(udp_header->dest), ntohs(udp_header->len));
     else
     {
-        printf("UDP Segment:\n");
+        printf("****************** UDP Segment ******************\n");
         printf("    |- Source Port: %d\n", src_port);
         printf("    |- Destination Port: %d\n", dest_port);
         printf("    |- Length: %d\n", ntohs(udp_header->len));
@@ -43,19 +43,8 @@ void analyze_udp(const unsigned char *packet)
         analyze_http(http_payload, http_payload_length);
     }
 
-    if (src_port == 67 || dest_port == 67)
+    if (src_port == 67 || dest_port == 67 || src_port == 68 || dest_port == 68)
     {
-        const unsigned char *bootp_payload = packet + sizeof(struct udphdr);
-        unsigned int bootp_payload_length = ntohs(udp_header->len) - sizeof(struct udphdr);
-
-        analyze_bootp_dhcp(bootp_payload, bootp_payload_length);
-    }
-
-    if (src_port == 68 || dest_port == 68)
-    {
-        const unsigned char *bootp_payload = packet + sizeof(struct udphdr);
-        unsigned int bootp_payload_length = ntohs(udp_header->len) - sizeof(struct udphdr);
-
-        analyze_bootp_dhcp(bootp_payload, bootp_payload_length);
+        analyze_dhcp(packet + sizeof(struct udphdr), ntohs(udp_header->len) - sizeof(struct udphdr));
     }
 }

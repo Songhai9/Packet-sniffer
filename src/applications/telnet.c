@@ -14,8 +14,16 @@ void analyze_telnet(const unsigned char *packet, int length)
     int i = 0;
     int command_printed = 0; // Indicateur pour savoir si une commande a été imprimée
 
-    if (verbose_level == 1 || verbose_level == 2)
-        printf("Telnet |\n");
+    if (verbose_level == 1)
+    {
+        printf("| Telnet");
+    }
+    else if (verbose_level == 2)
+    {
+        printf("Telnet Command(s)");
+        printf("\n");
+    }
+
     else
     {
         while (i < length)

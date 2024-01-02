@@ -36,14 +36,14 @@ void analyze_ethernet(const unsigned char *packet, long unsigned int length)
              eth_header->ether_dhost[3], eth_header->ether_dhost[4], eth_header->ether_dhost[5]);
 
     if (verbose_level == 1)
-        printf("Ethernet | ");
+        printf("Ethernet ");
     else if (verbose_level == 2)
     {
         printf("Ethernet Header: Destination MAC : %s | Source MAC : %s\n", dest_mac, src_mac);
     }
     else
     {
-        printf("Ethernet Header:\n");
+        printf("****************** Ethernet Header ******************\n");
         printf("    |-Mac MAC: %s\n", dest_mac);
         printf("    |-Mac MAC: %s\n", src_mac);
         printf("    |-Protocol: %s\n", get_ethertype_description(ntohs(eth_header->ether_type)));

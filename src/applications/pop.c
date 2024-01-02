@@ -40,7 +40,7 @@ void analyze_pop(const unsigned char *packet, unsigned int length)
     }
 
     if (verbose_level == 1)
-        printf("POP | ");
+        printf("| POP ");
     else
     {
         if (contains_pop_command(buffer))

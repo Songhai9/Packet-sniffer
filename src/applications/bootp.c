@@ -1,196 +1,198 @@
+#include "../../include/applications/bootp.h"
 #include <stdio.h>
-#include <stdint.h>
-#include <arpa/inet.h> // Pour ntohl et ntohs
-#include <netinet/in.h>
-#include <string.h>
-#include "../include/applications/bootp.h"
+#include <arpa/inet.h> // For ntohl() and ntohs() functions
+#include <string.h>    // For strlen() function
 
 extern int verbose_level;
 
-static void print_mac_address(const uint8_t *mac);
-static void print_ip_address(uint32_t ip);
-static void print_bootp_dhcp_header(const bootp_dhcp_header *header);
-static void print_dhcp_option(const uint8_t *option);
+// Prototype de la nouvelle fonction pour lire les options DHCP
+void read_dhcp_options(const unsigned char *options, int length);
 
-// Fonction pour afficher l'adresse MAC formatée
+// Fonction qui prend en paramètre un paquet BOOTP et affiche tous les octets du paquet ap
+unsigned char *print_bootp_packet(const unsigned char *packet, unsigned int length, unsigned char *options)
+{
+    unsigned int i = 0;
+    unsigned int magic_cookie_index = 0;
+    unsigned char magic_cookie[] = {0x63, 0x82, 0x53, 0x63}; // Magic cookie sequence
+
+    // Find the index of the magic cookie sequence
+    while (i < length - sizeof(magic_cookie))
+    {
+        if (memcmp(packet + i, magic_cookie, sizeof(magic_cookie)) == 0)
+        {
+            magic_cookie_index = i;
+            break;
+        }
+        i++;
+    }
+
+    // Copy the bytes after the magic cookie to the end of the packet into the options array
+    unsigned int options_length = length - magic_cookie_index - sizeof(magic_cookie);
+    memcpy(options, packet + magic_cookie_index + sizeof(magic_cookie), options_length);
+
+    // Print the hexadecimal bytes
+    /* for (unsigned int j = 0; j < options_length; j++) {
+        printf("%02x ", options[j]);
+    }
+    printf("\n"); */
+
+    return options;
+}
+
+// Helper function to print MAC address in human-readable format
 void print_mac_address(const uint8_t *mac)
 {
-    printf("%02X:%02X:%02X:%02X:%02X:%02X",
+    printf("%02x:%02x:%02x:%02x:%02x:%02x",
            mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 }
 
-// Fonction pour afficher une adresse IP formatée
-void print_ip_address(uint32_t ip)
+void analyze_dhcp(const unsigned char *packet, unsigned int length)
 {
-    struct in_addr ip_addr;
-    ip_addr.s_addr = ip;
-    printf("%s", inet_ntoa(ip_addr));
-}
-
-// Fonction pour afficher les détails de l'en-tête BOOTP/DHCP
-void print_bootp_dhcp_header(const bootp_dhcp_header *header)
-{
-    printf("BOOTP/DHCP Header:\n");
-    printf("  Op: %d\n", header->op);
-    printf("  Htype: %d\n", header->htype);
-    printf("  Hlen: %d\n", header->hlen);
-    printf("  Hops: %d\n", header->hops);
-    printf("  Xid: %u\n", ntohl(header->xid));
-    printf("  Secs: %d\n", ntohs(header->secs));
-    printf("  Flags: %d\n", ntohs(header->flags));
-    printf("  CIAddr: ");
-    print_ip_address(header->ciaddr);
-    printf("\n");
-    printf("  YIAddr: ");
-    print_ip_address(header->yiaddr);
-    printf("\n");
-    printf("  SIAddr: ");
-    print_ip_address(header->siaddr);
-    printf("\n");
-    printf("  GIAddr: ");
-    print_ip_address(header->giaddr);
-    printf("\n");
-    printf("  CHAddr: ");
-    print_mac_address(header->chaddr);
-    printf("\n");
-    
-    // Afficher sname si c'est non vide
-    if (header->sname[0] != '\0') {
-        printf("  SName: %s\n", header->sname);
-    }
-
-    // Afficher file si c'est non vide
-    if (header->file[0] != '\0') {
-        printf("  File: %s\n", header->file);
-    }
-}
-
-// Fonction pour analyser et afficher une option DHCP
-void print_dhcp_option(const uint8_t *option)
-{
-    uint8_t option_code = option[0];
-    uint8_t option_length = option[1];
-    const uint8_t *option_data = &option[2];
-
-    printf("Option: %d ", option_code);
-
-    switch (option_code)
+    if (length < sizeof(dhcp_message_t))
     {
-    case 1: // Subnet Mask
-        if (option_length == 4)
-        {
-            struct in_addr subnet_mask;
-            memcpy(&subnet_mask, option_data, sizeof(subnet_mask));
-            printf("(Subnet Mask): %s\n", inet_ntoa(subnet_mask));
-        }
-        break;
-    case 3: // Router
-        printf("(Router): ");
-        for (int i = 0; i < option_length; i += 4)
-        {
-            struct in_addr router;
-            memcpy(&router, &option_data[i], sizeof(router));
-            printf("%s ", inet_ntoa(router));
-        }
-        printf("\n");
-        break;
-    case 6: // Domain Name Server
-        printf("(DNS): ");
-        for (int i = 0; i < option_length; i += 4)
-        {
-            struct in_addr dns;
-            memcpy(&dns, &option_data[i], sizeof(dns));
-            printf("%s ", inet_ntoa(dns));
-        }
-        printf("\n");
-        break;
-    case 12: // Host Name
-        printf("(Host Name): %.*s\n", option_length, option_data);
-        break;
-    case 15: // Domain Name
-        printf("(Domain Name): %.*s\n", option_length, option_data);
-        break;
-    case 28: // Broadcast Address
-        if (option_length == 4)
-        {
-            struct in_addr broadcast_address;
-            memcpy(&broadcast_address, option_data, sizeof(broadcast_address));
-            printf("(Broadcast Address): %s\n", inet_ntoa(broadcast_address));
-        }
-        break;
-    case 50: // Requested IP Address
-        if (option_length == 4)
-        {
-            struct in_addr requested_ip;
-            memcpy(&requested_ip, option_data, sizeof(requested_ip));
-            printf("(Requested IP Address): %s\n", inet_ntoa(requested_ip));
-        }
-        break;
-    case 51: // Lease Time
-        if (option_length == 4)
-        {
-            uint32_t lease_time = ntohl(*(uint32_t *)option_data);
-            printf("(Lease Time): %u seconds\n", lease_time);
-        }
-        break;
-    case 53: // DHCP Message Type
-        if (option_length == 1)
-        {
-            const char *types[] = {"", "Discover", "Offer", "Request", "Decline", "Ack", "Nak", "Release", "Inform"};
-            uint8_t message_type = option_data[0];
-            if (message_type > 0 && message_type < sizeof(types) / sizeof(char *))
-            {
-                printf("(DHCP Message Type): %s\n", types[message_type]);
-            }
-            else
-            {
-                printf("(DHCP Message Type): Unknown\n");
-            }
-        }
-        break;
-    case 54: // Server Identifier
-        if (option_length == 4)
-        {
-            struct in_addr server_id;
-            memcpy(&server_id, option_data, sizeof(server_id));
-            printf("(Server Identifier): %s\n", inet_ntoa(server_id));
-        }
-        break;
-    // ... Autres options DHCP ...
-    default:
-        printf("(Unrecognized)\n");
-        break;
-    }
-}
-
-// Fonction principale pour analyser BOOTP/DHCP
-void analyze_bootp_dhcp(const unsigned char *packet, unsigned int length)
-{
-    if (length < sizeof(bootp_dhcp_header))
-    {
-        printf("Truncated BOOTP/DHCP packet\n");
+        printf("Truncated DHCP packet\n");
         return;
     }
 
-    const bootp_dhcp_header *header = (const bootp_dhcp_header *)packet;
+    // Stocker les options DHCP dans un tableau 'options'
+    unsigned char options[length];
+    print_bootp_packet(packet, length, options);
 
-    // Afficher les détails de l'en-tête BOOTP/DHCP
-    if (verbose_level > 1)
+    if (verbose_level == 1)
     {
-        print_bootp_dhcp_header(header);
+        printf("DHCP");
     }
-
-    // Analyse des options DHCP qui commencent après l'en-tête BOOTP/DHCP fixe et le champ 'vend'
-    const unsigned char *options = packet + 240; // La taille de l'en-tête BOOTP/DHCP sans les options
-    unsigned int option_index = 0;
-    while (option_index < length - 240 && options[option_index] != 0xFF)
+    else if (verbose_level == 2)
     {
-        if (options[option_index] == 0)
-        { // Option Pad
-            option_index++;
-            continue;
+        printf("DHCP Packet : Op Code : %d ", ((dhcp_message_t *)packet)->op);
+        if (options != NULL)
+        {
+            printf(" Options available\n");
         }
-        print_dhcp_option(&options[option_index]);
-        option_index += options[option_index + 1] + 2;
+    }
+    else
+    {
+
+        const dhcp_message_t *dhcp = (const dhcp_message_t *)packet;
+
+        printf("****************** DHCP Message ******************\n");
+        printf("    |-Op Code: %d\n", dhcp->op);
+        printf("    |-Hardware Type: %d\n", dhcp->htype);
+        printf("    |-Hardware Address Length: %d\n", dhcp->hlen);
+        printf("    |-Hops: %d\n", dhcp->hops);
+        printf("    |-Transaction ID: 0x%08x\n", ntohl(dhcp->xid));
+        printf("    |-Seconds Elapsed: %d\n", ntohs(dhcp->secs));
+        printf("    |-Flags: 0x%04x\n", ntohs(dhcp->flags));
+        printf("    |-Client IP Address: %s\n", inet_ntoa(*(struct in_addr *)&dhcp->ciaddr));
+        printf("    |-Your (client) IP Address: %s\n", inet_ntoa(*(struct in_addr *)&dhcp->yiaddr));
+        printf("    |-Next Server IP Address: %s\n", inet_ntoa(*(struct in_addr *)&dhcp->siaddr));
+        printf("    |-Relay Agent IP Address: %s\n", inet_ntoa(*(struct in_addr *)&dhcp->giaddr));
+
+        // Formatting and printing client hardware address
+        printf("    |-Client Hardware Address: ");
+        print_mac_address(dhcp->chaddr);
+        printf("\n");
+
+        // Formatting and printing server name
+        printf("    |-Server Name: ");
+        if (strlen((const char *)dhcp->sname) == 0)
+            printf("empty\n");
+        else
+            printf("%s\n", dhcp->sname);
+
+        // Formatting and printing boot file name
+        printf("    |-Boot File Name: ");
+        if (strlen((const char *)dhcp->file) == 0)
+            printf("empty\n");
+        else
+            printf("%s\n", dhcp->file);
+
+        // Appel de la nouvelle fonction pour lire les options DHCP
+
+        // S'il le tableau 'options' contient des données, nous les analysons
+        // à partir d'après le magic cookie
+        printf("****************** DHCP Options ******************\n");
+        if (options[0] != 0)
+        {
+            read_dhcp_options(options, length);
+        }
+    }
+}
+
+void read_dhcp_options(const unsigned char *options, int length)
+{
+    int i = 0;
+    while (i < length)
+    {
+        uint8_t code = options[i++];
+        if (code == DHCP_OPTION_END)
+        {
+            printf("Option: End\n");
+            break; // Option de fin
+        }
+
+        uint8_t len = options[i++];
+        const unsigned char *data = options + i;
+
+        switch (code)
+        {
+        case DHCP_OPTION_SUBNET_MASK: // Masque de sous-réseau
+            printf("Option: Subnet Mask, Data: %s\n", inet_ntoa(*(struct in_addr *)data));
+            break;
+        case DHCP_OPTION_ROUTER: // Routeur
+            printf("Option: Router, Data: %s\n", inet_ntoa(*(struct in_addr *)data));
+            break;
+        case DHCP_OPTION_DNS_SERVER:
+        { // DNS
+            printf("Option: DNS Server");
+            for (int j = 0; j < len; j += 4)
+            {
+                printf(", Data: %s", inet_ntoa(*(struct in_addr *)(data + j)));
+            }
+            printf("\n");
+            break;
+        }
+        case DHCP_OPTION_HOSTNAME: // Nom d'hôte
+            printf("Option: Host Name, Data: %.*s\n", len, data);
+            break;
+        case DHCP_OPTION_REQUESTED_IP: // Adresse IP demandée
+            printf("Option: Requested IP Address, Data: %s\n", inet_ntoa(*(struct in_addr *)data));
+            break;
+        case DHCP_OPTION_IP_LEASE_TIME: // Durée du bail IP
+            printf("Option: IP Lease Time, Data: %u\n", ntohl(*(uint32_t *)data));
+            break;
+        case DHCP_OPTION_MESSAGE_TYPE: // Type de message DHCP
+            printf("Option: DHCP Message Type, Data: %d\n", data[0]);
+            break;
+        case DHCP_OPTION_SERVER_IDENTIFIER: // Identifiant du serveur DHCP
+            printf("Option: DHCP Server Identifier, Data: %s\n", inet_ntoa(*(struct in_addr *)data));
+            break;
+        case DHCP_OPTION_PARAMETER_REQUEST: // Liste de requête de paramètres
+            printf("Option: Parameter Request List");
+            for (int j = 0; j < len; j++)
+            {
+                printf(", Data: %d", data[j]);
+            }
+            printf("\n");
+            break;
+        case DHCP_CLIENT_IDENTIFIER: // Identifiant du client
+            printf("Option: Client Identifier, Data: ");
+            for (int j = 0; j < len; j++)
+            {
+                printf("%02x", data[j]);
+            }
+            printf("\n");
+            break;
+        default:
+            printf("Option: %d, Length: %d, Data: ", code, len);
+            for (int j = 0; j < len; j++)
+            {
+                printf("%02x", data[j]);
+            }
+            printf("\n");
+            break;
+        }
+
+        i += len;
     }
 }

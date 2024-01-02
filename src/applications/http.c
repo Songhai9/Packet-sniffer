@@ -43,7 +43,7 @@ void analyze_http(const uint8_t *packet, unsigned int length)
     }
 
     if (verbose_level == 1)
-        printf("HTTP | ");
+        printf("| HTTP ");
 
     else if (verbose_level == 2)
     {
@@ -72,7 +72,7 @@ void analyze_http(const uint8_t *packet, unsigned int length)
             // Vérifier si la méthode HTTP est connue
             if (is_http_method(request.method))
             {
-                printf("HTTP Request : \n");
+                printf("****************** HTTP Request ****************** \n");
                 printf("    |- Request Method: %s\n", request.method);
                 printf("    |- Request URI: %s\n", request.uri);
                 printf("    |- HTTP Version: %s\n", request.version);
@@ -108,7 +108,7 @@ void analyze_http(const uint8_t *packet, unsigned int length)
             http_response_t response;
             parse_http_response(packet, &response);
 
-            printf("HTTP Response : \n");
+            printf("****************** HTTP Response ******************\n");
             printf("    |- HTTP Version: %s\n", response.version);
             printf("    |- Status Code: %s\n", response.status_code);
             printf("    |- Reason Phrase: %s\n", response.reason_phrase);

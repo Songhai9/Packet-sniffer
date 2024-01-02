@@ -72,7 +72,7 @@ void analyze_smtp(const unsigned char *packet, unsigned int length)
     }
 
     if (verbose_level == 1)
-        printf("SMTP | ");
+        printf("| SMTP ");
     else
     {
         if (contains_smtp_command(buffer))
