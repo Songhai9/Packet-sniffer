@@ -1,4 +1,4 @@
-#include "../include/applications/telnet.h"
+#include "../../include/applications/telnet.h"
 #include <stdio.h>
 
 extern int verbose_level;

@@ -162,7 +162,37 @@ void read_dhcp_options(const unsigned char *options, int length)
             printf("Option: IP Lease Time, Data: %u\n", ntohl(*(uint32_t *)data));
             break;
         case DHCP_OPTION_MESSAGE_TYPE: // Type de message DHCP
-            printf("Option: DHCP Message Type, Data: %d\n", data[0]);
+            printf("Option: DHCP Message Type, Data: ");
+            switch (data[0])
+            {
+            case DHCP_DISCOVER:
+                printf("DHCP Discover\n");
+                break;
+            case DHCP_OFFER:
+                printf("DHCP Offer\n");
+                break;
+            case DHCP_REQUEST:
+                printf("DHCP Request\n");
+                break;
+            case DHCP_DECLINE:
+                printf("DHCP Decline\n");
+                break;
+            case DHCP_ACK:
+                printf("DHCP Ack\n");
+                break;
+            case DHCP_NAK:
+                printf("DHCP Nak\n");
+                break;
+            case DHCP_RELEASE:
+                printf("DHCP Release\n");
+                break;
+            case DHCP_INFORM:
+                printf("DHCP Inform\n");
+                break;
+            default:
+                printf("Unknown\n");
+                break;
+            }
             break;
         case DHCP_OPTION_SERVER_IDENTIFIER: // Identifiant du serveur DHCP
             printf("Option: DHCP Server Identifier, Data: %s\n", inet_ntoa(*(struct in_addr *)data));
