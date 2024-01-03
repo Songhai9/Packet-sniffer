@@ -30,9 +30,6 @@ $(OBJDIR)/%.o: $(APPDIR)/%.c
 	$(CC) $(CFLAGS) -I$(INCDIR) -I$(INCDIR)/applications -c $< -o $@
 
 clean:
-	rm -rf $(OBJDIR)/* $(BINDIR)/* *~ core $(INCDIR)/*~ *.txt
-
-clean-docs:
 	rm -rf $(OBJDIR) $(BINDIR) docs/* *~ core $(INCDIR)/*~ *.txt
 
 .PHONY: all clean directories

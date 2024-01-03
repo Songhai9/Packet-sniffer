@@ -1,4 +1,4 @@
-TODO
+------------------------------------------------------- TODO ------------------------------------------------------------
 ✅ = Testé et fonctionnel 🟨 = Pas testé, fonctionnel 🟥 = Testé, non fonctionnel
 
 CAPTURE
@@ -31,7 +31,8 @@ OPTIONS
 - [x] -v ✅
 
 
-Structure :
+
+------------------------------------------------------- STRUCTURE -------------------------------------------------------
 
 analyseur-reseau/
 │
@@ -63,3 +64,24 @@ analyseur-reseau/
 │       └── ...
 │
 └── Makefile              # Makefile pour la compilation
+
+
+------------------------------------------------------ DESCRIPTION ------------------------------------------------------
+
+PROJET ANALYSEUR RÉSEAU :
+
+Le code de ce projet implémente un analyseur réseau simple.
+Le Makefile pour compiler le code est fourni. Pour lancer le programme, il faut se rendre dans le dossier
+'bin'.
+Le programme a plusieurs modes de lancement :
+- Sans fichier contenant des captures, le programme lance une analyse de trames prédéterminés et affiche les résultats comme il le ferait en 
+temps normal. Initialement à but de test, il a été jugé pertinent de garder cet aspect, car il permet de montrer l'affichage de tous les protocoles pouvant être analysés par le programme.
+- Avec l'option '-v' pour gérer la verbosité des résultats affichés par le programme. Lorsque ce n'est pas précisé, la verbosité est au maximum (3) par défaut. Il y a trois modes de verbosité allant de 1 à 3. Cette option est compatible avec ou sans fichier contenant des captures donné en paramètre.
+- Avec l'option '-i [interface]', le programme analyse toutes les trames qui circulent par l'interface donné en paramètre. Il s'agit d'une analyse live.
+- Avec l'option '-o [output-file]', le programme analyse toutes les trames qui sont dans le fichier 'output-file'. Cette option est conçu pour que l'output file soit un fichier .pcap obtenu grâve à l'utilisation de tcpdump. Un dossier 'input', avec un fichier est fourni pour tester l'option, encore une fois initialement implémenter à des fins de test, il a tout de même été conservé. Il s'agit de l'analyse offline.
+
+Peu importe le mode de lancement du programme, celui-ci ouvrira en plus un fichier 'trame.txt' contenant le contenu brut des trames. Les résultats seront affichés en ligne de commande.
+
+Une documentation Doxygen sur navigateur est disponible en exécutant la commande 'xdg-open index.html' dans le répertoire 'docs/html'. ('doxygen Doxyfile' pour la générer).
+
+Les protocoles marqués d'un "~" sont des protocoles dont l'affichage est inconstant pour des raisons restées non identifiées. En effet, parfois des caractères parasites s'affichent.
