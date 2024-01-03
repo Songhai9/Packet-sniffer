@@ -3,7 +3,46 @@
 
 #include <stdint.h>
 
-// Structure for the fixed part of the DHCP message
+/**
+ * @file bootp.h
+ * @brief Fichier d'en-tête pour le traitement des paquets BOOTP/DHCP.
+ *
+ * Ce fichier contient la déclaration de la structure pour analyser les paquets BOOTP/DHCP.
+ */
+
+/**
+ * @struct bootp_t
+ * @brief Représente la partie fixe d'un message BOOTP/DHCP.
+ *
+ * @var bootp_t::op
+ * Code opérationnel du message / type de message.
+ * @var bootp_t::htype
+ * Type d'adresse matérielle.
+ * @var bootp_t::hlen
+ * Longueur de l'adresse matérielle.
+ * @var bootp_t::hops
+ * Nombre de sauts.
+ * @var bootp_t::xid
+ * Identifiant de transaction.
+ * @var bootp_t::secs
+ * Secondes écoulées.
+ * @var bootp_t::flags
+ * Drapeaux.
+ * @var bootp_t::ciaddr
+ * Adresse IP client.
+ * @var bootp_t::yiaddr
+ * Adresse IP 'votre' (client).
+ * @var bootp_t::siaddr
+ * Adresse IP du serveur suivant.
+ * @var bootp_t::giaddr
+ * Adresse IP de l'agent relais.
+ * @var bootp_t::chaddr
+ * Adresse matérielle client.
+ * @var bootp_t::sname
+ * Nom d'hôte du serveur.
+ * @var bootp_t::file
+ * Nom du fichier de démarrage.
+ */
 typedef struct
 {
     uint8_t op;         // Message op code / message type

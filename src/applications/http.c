@@ -22,6 +22,12 @@ const char *http_methods[] = {
     "PATCH",
     NULL};
 
+/**
+ * @brief Vérifie si une chaîne correspond à une méthode HTTP connue.
+ * 
+ * @param str La chaîne à vérifier.
+ * @return 1 si c'est une méthode HTTP, 0 sinon.
+ */
 int is_http_method(const char *str)
 {
     for (int i = 0; http_methods[i] != NULL; i++)
@@ -34,6 +40,15 @@ int is_http_method(const char *str)
     return 0;
 }
 
+/**
+ * @brief Analyse un paquet HTTP et affiche ses informations.
+ * 
+ * Cette fonction parcourt le paquet HTTP et, selon son contenu, appelle soit la fonction
+ * d'analyse des requêtes HTTP soit celle des réponses HTTP.
+ * 
+ * @param packet Le paquet HTTP à analyser.
+ * @param length La longueur du paquet HTTP.
+ */
 void analyze_http(const uint8_t *packet, unsigned int length)
 {
     // Vérifier si la taille de la charge utile est suffisante pour contenir une requête ou une réponse HTTP

@@ -15,7 +15,12 @@ const char *ftp_commands[] = {
     NULL // Marqueur de fin de liste
 };
 
-// Fonction pour vérifier si un paquet contient une commande FTP
+/**
+ * @brief Vérifie si un paquet contient une commande FTP.
+ * 
+ * @param packet Le paquet à vérifier.
+ * @return 1 si une commande FTP est trouvée, 0 sinon.
+ */
 int contains_ftp_command(const char *packet)
 {
     for (int i = 0; ftp_commands[i] != NULL; i++)
@@ -53,7 +58,16 @@ const char *get_ftp_response_desc(int code)
     return "Unknown response code"; // Si le code n'est pas trouvé
 }
 
-// Fonction pour analyser un paquet potentiellement FTP
+
+/**
+ * @brief Analyse un paquet FTP et affiche ses informations.
+ * 
+ * Cette fonction parcourt le paquet FTP et affiche les commandes et réponses trouvées.
+ * Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet FTP à analyser.
+ * @param length La longueur du paquet FTP.
+ */
 void analyze_ftp(const unsigned char *packet, unsigned int length)
 {
     char buffer[length + 1];

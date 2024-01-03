@@ -8,6 +8,14 @@
 
 extern int verbose_level;
 
+/**
+ * @brief Analyse un paquet UDP et affiche ses informations.
+ * 
+ * Cette fonction extrait et affiche les détails du segment UDP, tels que les ports source et destination,
+ * ainsi que la longueur du segment. Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet UDP à analyser.
+ */
 void analyze_udp(const unsigned char *packet)
 {
 

@@ -5,6 +5,15 @@
 
 extern int verbose_level;
 
+/**
+ * @brief Analyse un paquet ARP et affiche ses informations.
+ * 
+ * Cette fonction extrait et affiche les détails du paquet ARP, tels que les adresses MAC et IP de l'expéditeur
+ * et du destinataire. Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet ARP à analyser.
+ * @param length La longueur du paquet ARP.
+ */
 void analyze_arp(const unsigned char *packet, long unsigned int length)
 {
     struct arphdr *arp_header = (struct arphdr *)packet;

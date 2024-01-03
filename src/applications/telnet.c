@@ -9,6 +9,15 @@ int is_telnet_command(unsigned char byte)
     return byte == DO || byte == DONT || byte == WILL || byte == WONT;
 }
 
+/**
+ * @brief Analyse un paquet Telnet et affiche ses informations.
+ * 
+ * Cette fonction parcourt le paquet Telnet et affiche les commandes et options trouvées.
+ * Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet Telnet à analyser.
+ * @param length La longueur du paquet Telnet.
+ */
 void analyze_telnet(const unsigned char *packet, int length)
 {
     int i = 0;
@@ -26,13 +35,15 @@ void analyze_telnet(const unsigned char *packet, int length)
 
     else
     {
+        printf("****************** Telnet Packet ******************\n");
         while (i < length)
         {
             if (packet[i] == IAC)
             {
+                printf("\n");
                 if (i + 2 < length && is_telnet_command(packet[i + 1]))
                 {
-                    printf("\nTelnet Command: ");
+                    printf("Telnet Command: ");
                     switch (packet[i + 1])
                     {
                     case DO:
@@ -72,6 +83,7 @@ void analyze_telnet(const unsigned char *packet, int length)
                 // S'arrête après avoir traité la dernière commande ou donnée textuelle
                 break;
             }
+
         }
         printf("\n");
     }

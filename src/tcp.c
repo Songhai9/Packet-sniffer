@@ -14,6 +14,15 @@
 
 extern int verbose_level;
 
+/**
+ * @brief Analyse un paquet TCP et affiche ses informations.
+ * 
+ * Cette fonction extrait et affiche les détails du paquet TCP, tels que les ports source et destination.
+ * Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet TCP à analyser.
+ * @param length La longueur du paquet TCP.
+ */
 void analyze_tcp(const unsigned char *packet, int length)
 {
     const struct tcphdr *tcp_header = (const struct tcphdr *)packet;

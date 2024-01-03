@@ -8,7 +8,17 @@ extern int verbose_level;
 // Prototype de la nouvelle fonction pour lire les options DHCP
 void read_dhcp_options(const unsigned char *options, int length);
 
-// Fonction qui prend en paramètre un paquet BOOTP et affiche tous les octets du paquet ap
+
+/**
+ * @brief Affiche tous les octets d'un paquet BOOTP et les options DHCP s'il y en a.
+ * 
+ * Cette fonction parcourt le paquet BOOTP/DHCP, affiche les détails de base et extrait les options DHCP.
+ * 
+ * @param packet Le paquet BOOTP/DHCP à analyser.
+ * @param length La longueur du paquet.
+ * @param options Un tableau pour stocker les options extraites.
+ * @return Le pointeur vers la fin du paquet ou le début des options DHCP.
+ */
 unsigned char *print_bootp_packet(const unsigned char *packet, unsigned int length, unsigned char *options)
 {
     unsigned int i = 0;
@@ -39,13 +49,28 @@ unsigned char *print_bootp_packet(const unsigned char *packet, unsigned int leng
     return options;
 }
 
-// Helper function to print MAC address in human-readable format
+/**
+ * @brief Affiche une adresse MAC.
+ * 
+ * Cette fonction affiche une adresse MAC au format XX:XX:XX:XX:XX:XX.
+ * 
+ * @param mac L'adresse MAC à afficher.
+ */
 void print_mac_address(const uint8_t *mac)
 {
     printf("%02x:%02x:%02x:%02x:%02x:%02x",
            mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 }
 
+/**
+ * @brief Analyse un paquet BOOTP/DHCP et affiche ses informations.
+ * 
+ * Cette fonction décompose le paquet BOOTP/DHCP et affiche ses composants principaux,
+ * tels que les adresses MAC source et destination, ainsi que le type de protocole.
+ * 
+ * @param packet Le paquet BOOTP/DHCP à analyser.
+ * @param length La longueur du paquet BOOTP/DHCP.
+ */
 void analyze_dhcp(const unsigned char *packet, unsigned int length)
 {
     if (length < sizeof(dhcp_message_t))
@@ -119,6 +144,14 @@ void analyze_dhcp(const unsigned char *packet, unsigned int length)
     }
 }
 
+/**
+ * @brief Lit les options DHCP et affiche leurs informations.
+ * 
+ * Cette fonction parcourt le tableau d'options DHCP et affiche les détails de chaque option.
+ * 
+ * @param options Le tableau d'options DHCP à analyser.
+ * @param length La longueur du tableau d'options DHCP.
+ */
 void read_dhcp_options(const unsigned char *options, int length)
 {
     int i = 0;

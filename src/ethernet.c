@@ -6,7 +6,13 @@
 
 extern int verbose_level;
 
-// Fonction pour obtenir une description lisible du type de protocole Ethernet
+/**
+ * @brief Obtient une description lisible du type de protocole Ethernet.
+ * 
+ * @param ethertype Le type de protocole Ethernet.
+ * @return La description textuelle du protocole Ethernet.
+ */
+
 const char *get_ethertype_description(uint16_t ethertype)
 {
     switch (ethertype)
@@ -21,6 +27,17 @@ const char *get_ethertype_description(uint16_t ethertype)
         return "Unknown";
     }
 }
+
+
+/**
+ * @brief Analyse une trame Ethernet et affiche ses informations.
+ * 
+ * Cette fonction décompose la trame Ethernet et affiche ses composants principaux,
+ * tels que les adresses MAC source et destination, ainsi que le type de protocole.
+ * 
+ * @param packet Le paquet Ethernet à analyser.
+ * @param length La longueur du paquet Ethernet.
+ */
 
 void analyze_ethernet(const unsigned char *packet, long unsigned int length)
 {

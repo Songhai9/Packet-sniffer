@@ -19,7 +19,12 @@ const char *smtp_commands[] = {
     "NOOP",
     "QUIT"};
 
-// Fonction pour vérifier si un paquet contient une commande SMTP
+/**
+ * @brief Vérifie si un paquet contient une commande SMTP.
+ *
+ * @param packet Le paquet à vérifier.
+ * @return 1 si une commande SMTP est trouvée, 0 sinon.
+ */
 int contains_smtp_command(const char *packet)
 {
     for (int i = 0; smtp_commands[i] != NULL; i++)
@@ -56,7 +61,15 @@ const char *get_smtp_response_desc(int code)
     return "Unknown response code"; // Si le code n'est pas trouvé
 }
 
-// Fonction pour analyser un message SMTP
+/**
+ * @brief Analyse un paquet SMTP et affiche ses informations.
+ * 
+ * Cette fonction parcourt le paquet SMTP et affiche les commandes et les réponses trouvées.
+ * Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet SMTP à analyser.
+ * @param length La longueur du paquet SMTP.
+ */
 void analyze_smtp(const unsigned char *packet, unsigned int length)
 {
     char buffer[length + 1];

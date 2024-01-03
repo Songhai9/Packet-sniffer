@@ -9,7 +9,14 @@
 
 extern int verbose_level;
 
-char *get_ip_protocol_name(uint8_t protocol)
+
+/**
+ * @brief Obtient le nom du protocole IP en fonction de son identifiant.
+ * 
+ * @param protocol Identifiant du protocole IP.
+ * @return Le nom du protocole IP.
+ */
+const char *get_ip_protocol_name(uint8_t protocol)
 {
     switch (protocol)
     {
@@ -26,6 +33,16 @@ char *get_ip_protocol_name(uint8_t protocol)
     }
 }
 
+
+/**
+ * @brief Analyse un paquet IP et affiche ses informations.
+ * 
+ * Cette fonction extrait et affiche les détails du paquet IP, tels que les adresses source et destination,
+ * ainsi que le protocole de couche supérieure utilisé.
+ * 
+ * @param packet Le paquet IP à analyser.
+ * @param length La longueur du paquet IP.
+ */
 void analyze_ip(const unsigned char *packet, unsigned int length)
 {
     const struct iphdr *ip_header = (struct iphdr *)packet;

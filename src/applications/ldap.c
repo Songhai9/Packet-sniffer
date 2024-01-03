@@ -6,7 +6,7 @@
 extern int verbose_level;
 
 // Liste des opérations LDAP connues
-const char *ldap_operations[] = {
+/* const char *ldap_operations[] = {
     "BindRequest", "BindResponse",
     "SearchRequest", "SearchResponse",
     "ModifyRequest", "ModifyResponse",
@@ -30,7 +30,17 @@ int contains_ldap_operation(const char *operation)
         i++;
     }
     return 0;
-}
+} */
+
+/**
+ * @brief Analyse un paquet LDAP et affiche ses informations.
+ * 
+ * Cette fonction parcourt le paquet LDAP et affiche les opérations et réponses trouvées.
+ * Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet LDAP à analyser.
+ * @param length La longueur du paquet LDAP.
+ */
 
 void analyze_ldap(const unsigned char *packet, unsigned int length)
 {
@@ -50,16 +60,17 @@ void analyze_ldap(const unsigned char *packet, unsigned int length)
         printf("| LDAP ");
     else
     {
-        if (contains_ldap_operation(buffer))
+        if (verbose_level >= 2)
         {
-            if (verbose_level >= 2)
+            printf("LDAP Operation: ");
+            for (unsigned int i = 0; i < operation_end; i++)
             {
-                printf("LDAP Operation: %s\n", buffer);
+                if (isprint((unsigned char)buffer[i]))
+                {
+                    printf("%c", buffer[i]);
+                }
             }
-            else
-            {
-                printf("LDAP Activity Detected but Unrecognized\n");
-            }
+            printf("\n");
         }
         else
         {

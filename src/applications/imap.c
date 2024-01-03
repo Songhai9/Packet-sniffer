@@ -5,7 +5,15 @@
 
 extern int verbose_level;
 
-// Fonction pour analyser un paquet potentiellement IMAP
+/**
+ * @brief Analyse un paquet IMAP et affiche ses informations.
+ * 
+ * Cette fonction parcourt le paquet IMAP et affiche les commandes et réponses trouvées.
+ * Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet IMAP à analyser.
+ * @param length La longueur du paquet IMAP.
+ */
 void analyze_imap(const unsigned char *packet, unsigned int length)
 {
     char buffer[length + 1];

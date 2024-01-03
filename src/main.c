@@ -13,6 +13,16 @@
 
 int verbose_level = 3;
 
+/**
+ * @brief Point d'entrée principal du programme d'analyseur réseau.
+ * 
+ * Ce programme analyse les paquets réseau capturés sur une interface spécifiée ou depuis un fichier.
+ * Il utilise pcap pour la capture et l'analyse des paquets.
+ * 
+ * @param argc Nombre d'arguments de la ligne de commande.
+ * @param argv Tableau des arguments de la ligne de commande.
+ * @return 0 en cas de succès, une autre valeur en cas d'erreur.
+ */
 int main(int argc, char *argv[])
 {
 
@@ -24,6 +34,7 @@ int main(int argc, char *argv[])
     // const unsigned char *packet;
     int opt;
 
+    // Traitement des arguments de la ligne de commande
     while ((opt = getopt(argc, argv, "i:o:v:")) != -1)
     {
         switch (opt)
@@ -53,6 +64,7 @@ int main(int argc, char *argv[])
     if (interface == NULL && input_file == NULL)
     {
         // Exemple de trame
+
         // Exemple de trame ICMP (Echo Request)
         uint8_t trame_icmp[] = {
             // En-tête Ethernet
@@ -75,6 +87,7 @@ int main(int argc, char *argv[])
             0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x61,
             0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69};
 
+        // Exemple de trame IP (TCP)
         uint8_t trame_ip[] = {
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
             0x00, 0x18, 0x8b, 0x01, 0x9e, 0x00, // Adresse MAC source
@@ -93,6 +106,7 @@ int main(int argc, char *argv[])
             // Le reste de la trame contiendrait les données TCP/IP ou autre payload
         };
 
+        // Exemple de trame DNS
         uint8_t trame_udp_dns[] = {
             // En-tête Ethernet
             0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, // Adresse MAC destination (fictive)
@@ -114,6 +128,7 @@ int main(int argc, char *argv[])
             0x00, 0x01, 0x00, 0x01 // Question DNS pour example.com, Type A, Classe IN
         };
 
+        // Exemple de trame ARP (requête)
         uint8_t trame_arp[] = {
             0xff, 0xff, 0xff, 0xff, 0xff, 0xff, // Destination MAC: Broadcast
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Source MAC
@@ -129,6 +144,7 @@ int main(int argc, char *argv[])
             0xc0, 0xa8, 0x01, 0x01              // Target IP: 192.168.1.1
         };
 
+        // Exemple de trame HTTP
         uint8_t trame_http[] = {
             // En-tête Ethernet (fictif)
             0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x08, 0x00,
@@ -148,6 +164,7 @@ int main(int argc, char *argv[])
             0x20, 0x31, 0x33, 0x0d, 0x0a, 0x0d, 0x0a, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f,
             0x72, 0x6c, 0x64, 0x21};
 
+        // Exemple de trame FTP
         uint8_t trame_ftp[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
@@ -171,6 +188,7 @@ int main(int argc, char *argv[])
 
         };
 
+        // Exemple de trame SMTP
         uint8_t trame_smtp[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
@@ -192,6 +210,7 @@ int main(int argc, char *argv[])
             'm', 'p', 'l', 'e', '.', 'c', 'o', 'm',
             '\r', '\n'};
 
+        // Exemple de trame POP
         uint8_t trame_pop[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
@@ -213,7 +232,8 @@ int main(int argc, char *argv[])
             0x61, 0x6E, 0x6F, 0x6E, 0x79, 0x6D, 0x6F, 0x75, 0x73, // 'anonymous'
             0x0D, 0x0A                                            // '\r\n'
         };
-
+        
+        // Exemple de trame IMAP
         uint8_t trame_imap[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
@@ -238,6 +258,7 @@ int main(int argc, char *argv[])
             0x54, 0x41, 0x52, 0x54, 0x54, 0x4C, 0x53, 0x20, 0x41, 0x55, 0x54, 0x48, 0x3D, 0x50, 0x4C, 0x41,
             0x49, 0x4E, 0x5D, 0x20, 0x4C, 0x6F, 0x67, 0x67, 0x65, 0x64, 0x20, 0x69, 0x6E, 0x0D, 0x0A};
 
+        // Exemple de trame SCTP
         uint8_t trame_sctp[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
@@ -267,6 +288,7 @@ int main(int argc, char *argv[])
             0x00, 0x00, 0x00, 0x00  // Payload Protocol Identifier
         };
 
+        // Exemple de trame LDAP
         uint8_t trame_ldap[] = {
             // En-tête Ethernet
             0x00, 0x1a, 0xa0, 0x02, 0xbf, 0x0e, // Adresse MAC destination
@@ -291,6 +313,7 @@ int main(int argc, char *argv[])
             0x63, 0x72, 0x65, 0x74                          // Fin de l'opération (mot de passe 'secret')
         };
 
+        // Exemple de trame Telnet
         uint8_t trame_telnet[] = {
             // En-tête Ethernet
             0x00, 0x1b, 0xc0, 0x03, 0xdf, 0x1e, // Adresse MAC destination
@@ -314,6 +337,7 @@ int main(int argc, char *argv[])
             0x75, 0x72                    // "ur"
         };
 
+        // Exemple de trame DHCP
         uint8_t trame_dhcp[] = {
             0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x0a, 0x95, 0x9d, 0x1c, 0xe8, 0x08, 0x00, 0x45, 0x00,
             0x01, 0x48, 0x00, 0x00, 0x00, 0x00, 0x80, 0x11, 0x39, 0xa6, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff,

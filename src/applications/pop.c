@@ -11,7 +11,12 @@ const char *pop_commands[] = {
     NULL // Marqueur de fin de liste
 };
 
-// Fonction pour vérifier si un paquet contient une commande POP
+/**
+ * @brief Vérifie si un paquet contient une commande POP.
+ * 
+ * @param packet Le paquet à vérifier.
+ * @return 1 si une commande POP est trouvée, 0 sinon.
+ */
 int contains_pop_command(const char *packet)
 {
     for (int i = 0; pop_commands[i] != NULL; i++)
@@ -24,7 +29,15 @@ int contains_pop_command(const char *packet)
     return 0; // Aucune commande trouvée
 }
 
-// Fonction pour analyser un paquet potentiellement POP
+/**
+ * @brief Analyse un paquet POP et affiche ses informations.
+ * 
+ * Cette fonction parcourt le paquet POP et affiche les commandes et réponses trouvées.
+ * Elle adapte l'affichage en fonction du niveau de verbosité défini.
+ * 
+ * @param packet Le paquet POP à analyser.
+ * @param length La longueur du paquet POP.
+ */
 void analyze_pop(const unsigned char *packet, unsigned int length)
 {
     char buffer[length + 1];

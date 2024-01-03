@@ -3,7 +3,30 @@
 
 #include <stdint.h>
 
-// Structure de l'en-tête DNS
+/**
+ * @file dns.h
+ * @brief Fichier d'en-tête pour le traitement des paquets DNS.
+ *
+ * Ce fichier contient les déclarations des structures et fonctions pour analyser les paquets DNS.
+ */
+
+/**
+ * @struct dns_header_t
+ * @brief Représente l'en-tête d'un paquet DNS.
+ *
+ * @var dns_header_t::id
+ * Identifiant du paquet DNS.
+ * @var dns_header_t::flags
+ * Drapeaux du paquet DNS.
+ * @var dns_header_t::qdcount
+ * Nombre de questions dans le paquet DNS.
+ * @var dns_header_t::ancount
+ * Nombre de réponses dans le paquet DNS.
+ * @var dns_header_t::nscount
+ * Nombre d'enregistrements d'autorité dans le paquet DNS.
+ * @var dns_header_t::arcount
+ * Nombre d'enregistrements supplémentaires dans le paquet DNS.
+ */
 typedef struct
 {
     uint16_t id;      // Identifiant
