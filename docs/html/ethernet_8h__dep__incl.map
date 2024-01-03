@@ -1,6 +1,0 @@
-<map id="include/ethernet.h" name="include/ethernet.h">
-<area shape="rect" id="node1" title="Fichier d&#39;en&#45;tête pour le traitement des trames Ethernet." alt="" coords="115,5,255,32"/>
-<area shape="rect" id="node2" href="$ethernet_8c.html" title=" " alt="" coords="5,80,116,107"/>
-<area shape="rect" id="node3" href="$main_8c.html" title=" " alt="" coords="140,80,229,107"/>
-<area shape="rect" id="node4" href="$packet__capture_8c.html" title=" " alt="" coords="254,80,409,107"/>
-</map>

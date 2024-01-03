@@ -1,6 +1,0 @@
-<map id="include/applications/dns.h" name="include/applications/dns.h">
-<area shape="rect" id="node1" title="Fichier d&#39;en&#45;tête pour le traitement des paquets DNS." alt="" coords="155,5,307,47"/>
-<area shape="rect" id="node2" href="$dns_8c.html" title=" " alt="" coords="5,95,168,121"/>
-<area shape="rect" id="node3" href="$tcp_8c.html" title=" " alt="" coords="193,95,269,121"/>
-<area shape="rect" id="node4" href="$udp_8c.html" title=" " alt="" coords="293,95,373,121"/>
-</map>
