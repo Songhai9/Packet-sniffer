@@ -1,0 +1,121 @@
+\hypertarget{bootp_8c}{}\doxysection{src/applications/bootp.c File Reference}
+\label{bootp_8c}\index{src/applications/bootp.c@{src/applications/bootp.c}}
+{\ttfamily \#include \char`\"{}../../include/applications/bootp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for bootp.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bootp_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{bootp_8c_aaf2a83ed19ed158e8a8fa16b7968d5df}{read\+\_\+dhcp\+\_\+options}} (const unsigned char $\ast$options, int length)
+\begin{DoxyCompactList}\small\item\em Lit les options DHCP et affiche leurs informations. \end{DoxyCompactList}\item 
+unsigned char $\ast$ \mbox{\hyperlink{bootp_8c_af1648928992a1e989d373e840addcf82}{print\+\_\+bootp\+\_\+packet}} (const unsigned char $\ast$packet, unsigned int length, unsigned char $\ast$options)
+\begin{DoxyCompactList}\small\item\em Affiche tous les octets d\textquotesingle{}un paquet BOOTP et les options DHCP s\textquotesingle{}il y en a. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bootp_8c_a105b04aa1f62b1f3fb0522f9e6fc1233}{print\+\_\+mac\+\_\+address}} (const uint8\+\_\+t $\ast$mac)
+\begin{DoxyCompactList}\small\item\em Affiche une adresse MAC. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bootp_8c_a70c9833b5d2c9c41550d76a240b4a8ed}{analyze\+\_\+dhcp}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet BOOTP/\+DHCP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{bootp_8c_a023ce1184a44c87f1a43765ab82eea80}{verbose\+\_\+level}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{bootp_8c_a70c9833b5d2c9c41550d76a240b4a8ed}\label{bootp_8c_a70c9833b5d2c9c41550d76a240b4a8ed}} 
+\index{bootp.c@{bootp.c}!analyze\_dhcp@{analyze\_dhcp}}
+\index{analyze\_dhcp@{analyze\_dhcp}!bootp.c@{bootp.c}}
+\doxysubsubsection{\texorpdfstring{analyze\_dhcp()}{analyze\_dhcp()}}
+{\footnotesize\ttfamily void analyze\+\_\+dhcp (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet BOOTP/\+DHCP et affiche ses informations. 
+
+Cette fonction décompose le paquet BOOTP/\+DHCP et affiche ses composants principaux, tels que les adresses MAC source et destination, ainsi que le type de protocole.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet BOOTP/\+DHCP à analyser. \\
+\hline
+{\em length} & La longueur du paquet BOOTP/\+DHCP. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bootp_8c_af1648928992a1e989d373e840addcf82}\label{bootp_8c_af1648928992a1e989d373e840addcf82}} 
+\index{bootp.c@{bootp.c}!print\_bootp\_packet@{print\_bootp\_packet}}
+\index{print\_bootp\_packet@{print\_bootp\_packet}!bootp.c@{bootp.c}}
+\doxysubsubsection{\texorpdfstring{print\_bootp\_packet()}{print\_bootp\_packet()}}
+{\footnotesize\ttfamily unsigned char$\ast$ print\+\_\+bootp\+\_\+packet (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length,  }\item[{unsigned char $\ast$}]{options }\end{DoxyParamCaption})}
+
+
+
+Affiche tous les octets d\textquotesingle{}un paquet BOOTP et les options DHCP s\textquotesingle{}il y en a. 
+
+Cette fonction parcourt le paquet BOOTP/\+DHCP, affiche les détails de base et extrait les options DHCP.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet BOOTP/\+DHCP à analyser. \\
+\hline
+{\em length} & La longueur du paquet. \\
+\hline
+{\em options} & Un tableau pour stocker les options extraites. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le pointeur vers la fin du paquet ou le début des options DHCP. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bootp_8c_a105b04aa1f62b1f3fb0522f9e6fc1233}\label{bootp_8c_a105b04aa1f62b1f3fb0522f9e6fc1233}} 
+\index{bootp.c@{bootp.c}!print\_mac\_address@{print\_mac\_address}}
+\index{print\_mac\_address@{print\_mac\_address}!bootp.c@{bootp.c}}
+\doxysubsubsection{\texorpdfstring{print\_mac\_address()}{print\_mac\_address()}}
+{\footnotesize\ttfamily void print\+\_\+mac\+\_\+address (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{mac }\end{DoxyParamCaption})}
+
+
+
+Affiche une adresse MAC. 
+
+Cette fonction affiche une adresse MAC au format XX\+:\+XX\+:\+XX\+:\+XX\+:\+XX\+:XX.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mac} & L\textquotesingle{}adresse MAC à afficher. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bootp_8c_aaf2a83ed19ed158e8a8fa16b7968d5df}\label{bootp_8c_aaf2a83ed19ed158e8a8fa16b7968d5df}} 
+\index{bootp.c@{bootp.c}!read\_dhcp\_options@{read\_dhcp\_options}}
+\index{read\_dhcp\_options@{read\_dhcp\_options}!bootp.c@{bootp.c}}
+\doxysubsubsection{\texorpdfstring{read\_dhcp\_options()}{read\_dhcp\_options()}}
+{\footnotesize\ttfamily void read\+\_\+dhcp\+\_\+options (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{options,  }\item[{int}]{length }\end{DoxyParamCaption})}
+
+
+
+Lit les options DHCP et affiche leurs informations. 
+
+Cette fonction parcourt le tableau d\textquotesingle{}options DHCP et affiche les détails de chaque option.
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Le tableau d\textquotesingle{}options DHCP à analyser. \\
+\hline
+{\em length} & La longueur du tableau d\textquotesingle{}options DHCP. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{bootp_8c_a023ce1184a44c87f1a43765ab82eea80}\label{bootp_8c_a023ce1184a44c87f1a43765ab82eea80}} 
+\index{bootp.c@{bootp.c}!verbose\_level@{verbose\_level}}
+\index{verbose\_level@{verbose\_level}!bootp.c@{bootp.c}}
+\doxysubsubsection{\texorpdfstring{verbose\_level}{verbose\_level}}
+{\footnotesize\ttfamily int verbose\+\_\+level\hspace{0.3cm}{\ttfamily [extern]}}
+

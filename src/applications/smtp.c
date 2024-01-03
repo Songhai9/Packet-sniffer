@@ -90,6 +90,8 @@ void analyze_smtp(const unsigned char *packet, unsigned int length)
     {
         if (contains_smtp_command(buffer))
         {
+            if (verbose_level == 3)
+                printf("****************** SMTP Packet ******************\n");
             if (verbose_level >= 2)
             {
                 printf("SMTP Command: %s\n", buffer);

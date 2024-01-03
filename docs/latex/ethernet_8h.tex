@@ -1,0 +1,93 @@
+\hypertarget{ethernet_8h}{}\doxysection{include/ethernet.h File Reference}
+\label{ethernet_8h}\index{include/ethernet.h@{include/ethernet.h}}
+
+
+Fichier d\textquotesingle{}en-\/tête pour le traitement des trames Ethernet.  
+
+
+{\ttfamily \#include $<$netinet/if\+\_\+ether.\+h$>$}\newline
+Include dependency graph for ethernet.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=185pt]{ethernet_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ethernet_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{ethernet_8h_a2bf226cb7c19fa5d0ba15508f820bfce}{get\+\_\+ethertype\+\_\+description}} (uint16\+\_\+t ethertype)
+\begin{DoxyCompactList}\small\item\em Retourne une description textuelle pour le type de protocole Ethernet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ethernet_8h_acc7ace08864b4c148a90bc88bd85e67a}{analyze\+\_\+ethernet}} (const unsigned char $\ast$packet, long unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse une trame Ethernet et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier d\textquotesingle{}en-\/tête pour le traitement des trames Ethernet. 
+
+Ce fichier contient les déclarations des fonctions pour analyser les trames Ethernet. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ethernet_8h_acc7ace08864b4c148a90bc88bd85e67a}\label{ethernet_8h_acc7ace08864b4c148a90bc88bd85e67a}} 
+\index{ethernet.h@{ethernet.h}!analyze\_ethernet@{analyze\_ethernet}}
+\index{analyze\_ethernet@{analyze\_ethernet}!ethernet.h@{ethernet.h}}
+\doxysubsubsection{\texorpdfstring{analyze\_ethernet()}{analyze\_ethernet()}}
+{\footnotesize\ttfamily void analyze\+\_\+ethernet (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{long unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse une trame Ethernet et affiche ses informations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet Ethernet à analyser. \\
+\hline
+{\em length} & La longueur du paquet Ethernet.\\
+\hline
+\end{DoxyParams}
+Cette fonction décompose la trame Ethernet et affiche ses composants principaux, tels que les adresses MAC source et destination, ainsi que le type de protocole.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet Ethernet à analyser. \\
+\hline
+{\em length} & La longueur du paquet Ethernet. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ethernet_8h_a2bf226cb7c19fa5d0ba15508f820bfce}\label{ethernet_8h_a2bf226cb7c19fa5d0ba15508f820bfce}} 
+\index{ethernet.h@{ethernet.h}!get\_ethertype\_description@{get\_ethertype\_description}}
+\index{get\_ethertype\_description@{get\_ethertype\_description}!ethernet.h@{ethernet.h}}
+\doxysubsubsection{\texorpdfstring{get\_ethertype\_description()}{get\_ethertype\_description()}}
+{\footnotesize\ttfamily const char$\ast$ get\+\_\+ethertype\+\_\+description (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{ethertype }\end{DoxyParamCaption})}
+
+
+
+Retourne une description textuelle pour le type de protocole Ethernet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ethertype} & Le type de protocole Ethernet (par exemple, ETHERTYPE\+\_\+\+IP). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La description textuelle du protocole Ethernet.
+\end{DoxyReturn}
+Retourne une description textuelle pour le type de protocole Ethernet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ethertype} & Le type de protocole Ethernet. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La description textuelle du protocole Ethernet. 
+\end{DoxyReturn}

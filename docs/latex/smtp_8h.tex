@@ -1,0 +1,68 @@
+\hypertarget{smtp_8h}{}\doxysection{include/applications/smtp.h File Reference}
+\label{smtp_8h}\index{include/applications/smtp.h@{include/applications/smtp.h}}
+
+
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets SMTP.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for smtp.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{smtp_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{smtp_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsmtp__response}{smtp\+\_\+response}}
+\begin{DoxyCompactList}\small\item\em Représente une réponse SMTP. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{smtp_8h_a7dac6734700fd5fedfdf4deecd8f41ae}{analyze\+\_\+smtp}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet SMTP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets SMTP. 
+
+Ce fichier contient les déclarations des fonctions pour analyser les paquets SMTP, ainsi que la structure pour représenter les réponses SMTP. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{smtp_8h_a7dac6734700fd5fedfdf4deecd8f41ae}\label{smtp_8h_a7dac6734700fd5fedfdf4deecd8f41ae}} 
+\index{smtp.h@{smtp.h}!analyze\_smtp@{analyze\_smtp}}
+\index{analyze\_smtp@{analyze\_smtp}!smtp.h@{smtp.h}}
+\doxysubsubsection{\texorpdfstring{analyze\_smtp()}{analyze\_smtp()}}
+{\footnotesize\ttfamily void analyze\+\_\+smtp (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet SMTP et affiche ses informations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet SMTP à analyser. \\
+\hline
+{\em length} & La longueur du paquet SMTP.\\
+\hline
+\end{DoxyParams}
+Cette fonction parcourt le paquet SMTP et affiche les commandes et les réponses trouvées. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet SMTP à analyser. \\
+\hline
+{\em length} & La longueur du paquet SMTP. \\
+\hline
+\end{DoxyParams}

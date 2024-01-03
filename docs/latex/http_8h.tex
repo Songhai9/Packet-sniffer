@@ -1,0 +1,99 @@
+\hypertarget{http_8h}{}\doxysection{include/applications/http.h File Reference}
+\label{http_8h}\index{include/applications/http.h@{include/applications/http.h}}
+
+
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets HTTP.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for http.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{http_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{http_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structhttp__request}{http\+\_\+request}}
+\begin{DoxyCompactList}\small\item\em Représente une requête HTTP. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structhttp__response}{http\+\_\+response}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{http_8h_a6272a7f92e0f1b66e07680f32f6f21b6}{HTTP\+\_\+\+MAX\+\_\+\+HEADER\+\_\+\+SIZE}}~2048
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structhttp__request}{http\+\_\+request}} \mbox{\hyperlink{http_8h_a14746691be9ca70e3db82b7fd608af93}{http\+\_\+request\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structhttp__response}{http\+\_\+response}} \mbox{\hyperlink{http_8h_ae70c244690bc7e66e159992fb2150544}{http\+\_\+response\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{http_8h_a880cb4a3532d0d0e23d3ff424e6e7862}{analyze\+\_\+http}} (const uint8\+\_\+t $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet HTTP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets HTTP. 
+
+Ce fichier contient les déclarations des structures et fonctions pour analyser les paquets HTTP. 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{http_8h_a6272a7f92e0f1b66e07680f32f6f21b6}\label{http_8h_a6272a7f92e0f1b66e07680f32f6f21b6}} 
+\index{http.h@{http.h}!HTTP\_MAX\_HEADER\_SIZE@{HTTP\_MAX\_HEADER\_SIZE}}
+\index{HTTP\_MAX\_HEADER\_SIZE@{HTTP\_MAX\_HEADER\_SIZE}!http.h@{http.h}}
+\doxysubsubsection{\texorpdfstring{HTTP\_MAX\_HEADER\_SIZE}{HTTP\_MAX\_HEADER\_SIZE}}
+{\footnotesize\ttfamily \#define HTTP\+\_\+\+MAX\+\_\+\+HEADER\+\_\+\+SIZE~2048}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{http_8h_a14746691be9ca70e3db82b7fd608af93}\label{http_8h_a14746691be9ca70e3db82b7fd608af93}} 
+\index{http.h@{http.h}!http\_request\_t@{http\_request\_t}}
+\index{http\_request\_t@{http\_request\_t}!http.h@{http.h}}
+\doxysubsubsection{\texorpdfstring{http\_request\_t}{http\_request\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structhttp__request}{http\+\_\+request}} \mbox{\hyperlink{http_8h_a14746691be9ca70e3db82b7fd608af93}{http\+\_\+request\+\_\+t}}}
+
+\mbox{\Hypertarget{http_8h_ae70c244690bc7e66e159992fb2150544}\label{http_8h_ae70c244690bc7e66e159992fb2150544}} 
+\index{http.h@{http.h}!http\_response\_t@{http\_response\_t}}
+\index{http\_response\_t@{http\_response\_t}!http.h@{http.h}}
+\doxysubsubsection{\texorpdfstring{http\_response\_t}{http\_response\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structhttp__response}{http\+\_\+response}} \mbox{\hyperlink{http_8h_ae70c244690bc7e66e159992fb2150544}{http\+\_\+response\+\_\+t}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{http_8h_a880cb4a3532d0d0e23d3ff424e6e7862}\label{http_8h_a880cb4a3532d0d0e23d3ff424e6e7862}} 
+\index{http.h@{http.h}!analyze\_http@{analyze\_http}}
+\index{analyze\_http@{analyze\_http}!http.h@{http.h}}
+\doxysubsubsection{\texorpdfstring{analyze\_http()}{analyze\_http()}}
+{\footnotesize\ttfamily void analyze\+\_\+http (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet HTTP et affiche ses informations. 
+
+Cette fonction parcourt le paquet HTTP et, selon son contenu, appelle soit la fonction d\textquotesingle{}analyse des requêtes HTTP soit celle des réponses HTTP.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet HTTP à analyser. \\
+\hline
+{\em length} & La longueur du paquet HTTP. \\
+\hline
+\end{DoxyParams}

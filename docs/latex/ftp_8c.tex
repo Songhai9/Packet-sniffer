@@ -1,0 +1,126 @@
+\hypertarget{ftp_8c}{}\doxysection{src/applications/ftp.c File Reference}
+\label{ftp_8c}\index{src/applications/ftp.c@{src/applications/ftp.c}}
+{\ttfamily \#include \char`\"{}../../include/applications/ftp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for ftp.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ftp_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ftp_8c_a13e14cf80555e554c8384b30c411bd4d}{contains\+\_\+ftp\+\_\+command}} (const char $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Vérifie si un paquet contient une commande FTP. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{ftp_8c_a4c61497597a852c860c698041b11e6df}{get\+\_\+ftp\+\_\+response\+\_\+desc}} (int code)
+\item 
+void \mbox{\hyperlink{ftp_8c_a4e7a6a0cab3967d85d5c3afac9adbae9}{analyze\+\_\+ftp}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet FTP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ftp_8c_a023ce1184a44c87f1a43765ab82eea80}{verbose\+\_\+level}}
+\item 
+const char $\ast$ \mbox{\hyperlink{ftp_8c_a25d95084a5e61067b331550583f8c6d9}{ftp\+\_\+commands}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{structftp__response}{ftp\+\_\+response}} \mbox{\hyperlink{ftp_8c_a76d26da28fef17eae18c06041ef42234}{ftp\+\_\+responses}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ftp_8c_a4e7a6a0cab3967d85d5c3afac9adbae9}\label{ftp_8c_a4e7a6a0cab3967d85d5c3afac9adbae9}} 
+\index{ftp.c@{ftp.c}!analyze\_ftp@{analyze\_ftp}}
+\index{analyze\_ftp@{analyze\_ftp}!ftp.c@{ftp.c}}
+\doxysubsubsection{\texorpdfstring{analyze\_ftp()}{analyze\_ftp()}}
+{\footnotesize\ttfamily void analyze\+\_\+ftp (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet FTP et affiche ses informations. 
+
+Cette fonction parcourt le paquet FTP et affiche les commandes et réponses trouvées. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet FTP à analyser. \\
+\hline
+{\em length} & La longueur du paquet FTP. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ftp_8c_a13e14cf80555e554c8384b30c411bd4d}\label{ftp_8c_a13e14cf80555e554c8384b30c411bd4d}} 
+\index{ftp.c@{ftp.c}!contains\_ftp\_command@{contains\_ftp\_command}}
+\index{contains\_ftp\_command@{contains\_ftp\_command}!ftp.c@{ftp.c}}
+\doxysubsubsection{\texorpdfstring{contains\_ftp\_command()}{contains\_ftp\_command()}}
+{\footnotesize\ttfamily int contains\+\_\+ftp\+\_\+command (\begin{DoxyParamCaption}\item[{const char $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Vérifie si un paquet contient une commande FTP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet à vérifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si une commande FTP est trouvée, 0 sinon. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ftp_8c_a4c61497597a852c860c698041b11e6df}\label{ftp_8c_a4c61497597a852c860c698041b11e6df}} 
+\index{ftp.c@{ftp.c}!get\_ftp\_response\_desc@{get\_ftp\_response\_desc}}
+\index{get\_ftp\_response\_desc@{get\_ftp\_response\_desc}!ftp.c@{ftp.c}}
+\doxysubsubsection{\texorpdfstring{get\_ftp\_response\_desc()}{get\_ftp\_response\_desc()}}
+{\footnotesize\ttfamily const char$\ast$ get\+\_\+ftp\+\_\+response\+\_\+desc (\begin{DoxyParamCaption}\item[{int}]{code }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ftp_8c_a25d95084a5e61067b331550583f8c6d9}\label{ftp_8c_a25d95084a5e61067b331550583f8c6d9}} 
+\index{ftp.c@{ftp.c}!ftp\_commands@{ftp\_commands}}
+\index{ftp\_commands@{ftp\_commands}!ftp.c@{ftp.c}}
+\doxysubsubsection{\texorpdfstring{ftp\_commands}{ftp\_commands}}
+{\footnotesize\ttfamily const char$\ast$ ftp\+\_\+commands\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}USER"{}}, \textcolor{stringliteral}{"{}PASS"{}}, \textcolor{stringliteral}{"{}ACCT"{}}, \textcolor{stringliteral}{"{}CWD"{}}, \textcolor{stringliteral}{"{}QUIT"{}}, \textcolor{stringliteral}{"{}RETR"{}}, \textcolor{stringliteral}{"{}STOR"{}}, \textcolor{stringliteral}{"{}LIST"{}}, \textcolor{stringliteral}{"{}NLST"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}SITE"{}}, \textcolor{stringliteral}{"{}SYST"{}}, \textcolor{stringliteral}{"{}STAT"{}}, \textcolor{stringliteral}{"{}HELP"{}}, \textcolor{stringliteral}{"{}NOOP"{}}, \textcolor{stringliteral}{"{}MKD"{}}, \textcolor{stringliteral}{"{}RMD"{}}, \textcolor{stringliteral}{"{}PWD"{}}, \textcolor{stringliteral}{"{}CDUP"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}STOU"{}}, \textcolor{stringliteral}{"{}SMNT"{}}, \textcolor{stringliteral}{"{}PORT"{}}, \textcolor{stringliteral}{"{}PASV"{}}, \textcolor{stringliteral}{"{}TYPE"{}}, \textcolor{stringliteral}{"{}STRU"{}}, \textcolor{stringliteral}{"{}MODE"{}}, \textcolor{stringliteral}{"{}RNFR"{}}, \textcolor{stringliteral}{"{}RNTO"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}DELE"{}}, \textcolor{stringliteral}{"{}MDTM"{}}, \textcolor{stringliteral}{"{}SIZE"{}}, \textcolor{stringliteral}{"{}REST"{}}, \textcolor{stringliteral}{"{}ABOR"{}}, \textcolor{stringliteral}{"{}RANG"{}}, \textcolor{stringliteral}{"{}AUTH"{}}, \textcolor{stringliteral}{"{}PBSZ"{}}, \textcolor{stringliteral}{"{}PROT"{}},}
+\DoxyCodeLine{    NULL }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp_8c_a76d26da28fef17eae18c06041ef42234}\label{ftp_8c_a76d26da28fef17eae18c06041ef42234}} 
+\index{ftp.c@{ftp.c}!ftp\_responses@{ftp\_responses}}
+\index{ftp\_responses@{ftp\_responses}!ftp.c@{ftp.c}}
+\doxysubsubsection{\texorpdfstring{ftp\_responses}{ftp\_responses}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structftp__response}{ftp\+\_\+response}} ftp\+\_\+responses\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \{200, \textcolor{stringliteral}{"{}Command okay"{}}\},}
+\DoxyCodeLine{    \{220, \textcolor{stringliteral}{"{}Service ready for new user"{}}\},}
+\DoxyCodeLine{    \{221, \textcolor{stringliteral}{"{}Service closing control connection"{}}\},}
+\DoxyCodeLine{    \{230, \textcolor{stringliteral}{"{}User logged in, proceed"{}}\},}
+\DoxyCodeLine{    \{425, \textcolor{stringliteral}{"{}Can't open data connection"{}}\},}
+\DoxyCodeLine{    \{426, \textcolor{stringliteral}{"{}Connection closed; transfer aborted"{}}\},}
+\DoxyCodeLine{    \{530, \textcolor{stringliteral}{"{}Not logged in"{}}\},}
+\DoxyCodeLine{    \{550, \textcolor{stringliteral}{"{}Requested action not taken"{}}\},}
+\DoxyCodeLine{    \{0, NULL\} }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{ftp_8c_a023ce1184a44c87f1a43765ab82eea80}\label{ftp_8c_a023ce1184a44c87f1a43765ab82eea80}} 
+\index{ftp.c@{ftp.c}!verbose\_level@{verbose\_level}}
+\index{verbose\_level@{verbose\_level}!ftp.c@{ftp.c}}
+\doxysubsubsection{\texorpdfstring{verbose\_level}{verbose\_level}}
+{\footnotesize\ttfamily int verbose\+\_\+level\hspace{0.3cm}{\ttfamily [extern]}}
+

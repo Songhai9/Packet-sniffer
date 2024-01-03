@@ -24,7 +24,7 @@ void analyze_arp(const unsigned char *packet, long unsigned int length)
         return;
     }
 
-    // Pointers to addresses
+    // Pointeurs vers les adresses MAC et IP de l'expéditeur et du destinataire
     unsigned char *sender_mac = (unsigned char *)(packet + sizeof(struct arphdr));
     unsigned char *sender_ip = (unsigned char *)(packet + sizeof(struct arphdr) + arp_header->ar_hln);
     unsigned char *target_mac = (unsigned char *)(packet + sizeof(struct arphdr) + arp_header->ar_hln + arp_header->ar_pln);

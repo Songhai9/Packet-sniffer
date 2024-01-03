@@ -1,6 +1,6 @@
 #include "../../include/applications/dns.h"
 #include <stdio.h>
-#include <arpa/inet.h> // Pour ntohs et ntohl
+#include <arpa/inet.h> 
 
 extern int verbose_level;
 

@@ -2,7 +2,6 @@
 #include "../include/tcp.h"
 #include "../include/udp.h"
 #include "../include/icmp.h"
-#include "../include/sctp.h"
 #include <netinet/ip.h>
 #include <stdio.h>
 #include <arpa/inet.h>
@@ -26,8 +25,6 @@ const char *get_ip_protocol_name(uint8_t protocol)
         return "UDP";
     case IPPROTO_ICMP:
         return "ICMP";
-    case IPPROTO_SCTP:
-        return "SCTP";
     default:
         return "Unknown";
     }
@@ -94,9 +91,5 @@ void analyze_ip(const unsigned char *packet, unsigned int length)
     if (ip_header->protocol == IPPROTO_ICMP)
     {
         analyze_icmp(packet + ip_header->ihl * 4, length - ip_header->ihl * 4);
-    }
-    if (ip_header->protocol == IPPROTO_SCTP)
-    {
-        analyze_sctp(packet + ip_header->ihl * 4, length - ip_header->ihl * 4);
     }
 }

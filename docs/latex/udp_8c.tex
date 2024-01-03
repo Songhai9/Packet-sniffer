@@ -1,0 +1,56 @@
+\hypertarget{udp_8c}{}\doxysection{src/udp.c File Reference}
+\label{udp_8c}\index{src/udp.c@{src/udp.c}}
+{\ttfamily \#include \char`\"{}../include/udp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/applications/dns.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/applications/http.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/applications/bootp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/udp.\+h$>$}\newline
+Include dependency graph for udp.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{udp_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{udp_8c_a6c7fc4ba2bfd0f4c73495cf89e81eba5}{analyze\+\_\+udp}} (const unsigned char $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet UDP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{udp_8c_a023ce1184a44c87f1a43765ab82eea80}{verbose\+\_\+level}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{udp_8c_a6c7fc4ba2bfd0f4c73495cf89e81eba5}\label{udp_8c_a6c7fc4ba2bfd0f4c73495cf89e81eba5}} 
+\index{udp.c@{udp.c}!analyze\_udp@{analyze\_udp}}
+\index{analyze\_udp@{analyze\_udp}!udp.c@{udp.c}}
+\doxysubsubsection{\texorpdfstring{analyze\_udp()}{analyze\_udp()}}
+{\footnotesize\ttfamily void analyze\+\_\+udp (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet UDP et affiche ses informations. 
+
+Cette fonction extrait et affiche les détails du segment UDP, tels que les ports source et destination, ainsi que la longueur du segment. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet UDP à analyser. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{udp_8c_a023ce1184a44c87f1a43765ab82eea80}\label{udp_8c_a023ce1184a44c87f1a43765ab82eea80}} 
+\index{udp.c@{udp.c}!verbose\_level@{verbose\_level}}
+\index{verbose\_level@{verbose\_level}!udp.c@{udp.c}}
+\doxysubsubsection{\texorpdfstring{verbose\_level}{verbose\_level}}
+{\footnotesize\ttfamily int verbose\+\_\+level\hspace{0.3cm}{\ttfamily [extern]}}
+

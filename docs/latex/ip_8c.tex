@@ -1,0 +1,80 @@
+\hypertarget{ip_8c}{}\doxysection{src/ip.c File Reference}
+\label{ip_8c}\index{src/ip.c@{src/ip.c}}
+{\ttfamily \#include \char`\"{}../include/ip.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/tcp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/udp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/icmp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$netinet/ip.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+Include dependency graph for ip.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ip_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \mbox{\hyperlink{ip_8c_a07e79ad6c19f0c8d19a9f3cde9da1998}{get\+\_\+ip\+\_\+protocol\+\_\+name}} (uint8\+\_\+t protocol)
+\begin{DoxyCompactList}\small\item\em Obtient le nom du protocole IP en fonction de son identifiant. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ip_8c_a16f0c2743c643c4e8392554f1739af1d}{analyze\+\_\+ip}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet IP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ip_8c_a023ce1184a44c87f1a43765ab82eea80}{verbose\+\_\+level}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ip_8c_a16f0c2743c643c4e8392554f1739af1d}\label{ip_8c_a16f0c2743c643c4e8392554f1739af1d}} 
+\index{ip.c@{ip.c}!analyze\_ip@{analyze\_ip}}
+\index{analyze\_ip@{analyze\_ip}!ip.c@{ip.c}}
+\doxysubsubsection{\texorpdfstring{analyze\_ip()}{analyze\_ip()}}
+{\footnotesize\ttfamily void analyze\+\_\+ip (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet IP et affiche ses informations. 
+
+Cette fonction extrait et affiche les détails du paquet IP, tels que les adresses source et destination, ainsi que le protocole de couche supérieure utilisé.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet IP à analyser. \\
+\hline
+{\em length} & La longueur du paquet IP. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ip_8c_a07e79ad6c19f0c8d19a9f3cde9da1998}\label{ip_8c_a07e79ad6c19f0c8d19a9f3cde9da1998}} 
+\index{ip.c@{ip.c}!get\_ip\_protocol\_name@{get\_ip\_protocol\_name}}
+\index{get\_ip\_protocol\_name@{get\_ip\_protocol\_name}!ip.c@{ip.c}}
+\doxysubsubsection{\texorpdfstring{get\_ip\_protocol\_name()}{get\_ip\_protocol\_name()}}
+{\footnotesize\ttfamily const char$\ast$ get\+\_\+ip\+\_\+protocol\+\_\+name (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{protocol }\end{DoxyParamCaption})}
+
+
+
+Obtient le nom du protocole IP en fonction de son identifiant. 
+
+Retourne le nom du protocole IP en fonction de son identifiant.
+
+
+\begin{DoxyParams}{Parameters}
+{\em protocol} & Identifiant du protocole IP. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le nom du protocole IP. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ip_8c_a023ce1184a44c87f1a43765ab82eea80}\label{ip_8c_a023ce1184a44c87f1a43765ab82eea80}} 
+\index{ip.c@{ip.c}!verbose\_level@{verbose\_level}}
+\index{verbose\_level@{verbose\_level}!ip.c@{ip.c}}
+\doxysubsubsection{\texorpdfstring{verbose\_level}{verbose\_level}}
+{\footnotesize\ttfamily int verbose\+\_\+level\hspace{0.3cm}{\ttfamily [extern]}}
+

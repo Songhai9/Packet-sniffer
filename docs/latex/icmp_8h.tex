@@ -1,0 +1,63 @@
+\hypertarget{icmp_8h}{}\doxysection{include/icmp.h File Reference}
+\label{icmp_8h}\index{include/icmp.h@{include/icmp.h}}
+
+
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets ICMP.  
+
+
+{\ttfamily \#include $<$netinet/ip\+\_\+icmp.\+h$>$}\newline
+Include dependency graph for icmp.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{icmp_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{icmp_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{icmp_8h_af1445576d3b5f6f13332d9ce22a1ccaa}{analyze\+\_\+icmp}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet ICMP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets ICMP. 
+
+Ce fichier contient la déclaration de la fonction pour analyser les paquets ICMP. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{icmp_8h_af1445576d3b5f6f13332d9ce22a1ccaa}\label{icmp_8h_af1445576d3b5f6f13332d9ce22a1ccaa}} 
+\index{icmp.h@{icmp.h}!analyze\_icmp@{analyze\_icmp}}
+\index{analyze\_icmp@{analyze\_icmp}!icmp.h@{icmp.h}}
+\doxysubsubsection{\texorpdfstring{analyze\_icmp()}{analyze\_icmp()}}
+{\footnotesize\ttfamily void analyze\+\_\+icmp (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet ICMP et affiche ses informations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet ICMP à analyser. \\
+\hline
+{\em length} & La longueur du paquet ICMP.\\
+\hline
+\end{DoxyParams}
+Cette fonction extrait et affiche les détails du paquet ICMP, tels que le type, le code, et le checksum. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet ICMP à analyser. \\
+\hline
+{\em length} & La longueur du paquet ICMP. \\
+\hline
+\end{DoxyParams}

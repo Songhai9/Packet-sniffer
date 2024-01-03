@@ -1,0 +1,129 @@
+\hypertarget{smtp_8c}{}\doxysection{src/applications/smtp.c File Reference}
+\label{smtp_8c}\index{src/applications/smtp.c@{src/applications/smtp.c}}
+{\ttfamily \#include \char`\"{}../../include/applications/smtp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for smtp.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{smtp_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{smtp_8c_a5b80919539ee0fa26991a294c70458cf}{contains\+\_\+smtp\+\_\+command}} (const char $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Vérifie si un paquet contient une commande SMTP. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{smtp_8c_a64cedd96e6926a58169e94037f962221}{get\+\_\+smtp\+\_\+response\+\_\+desc}} (int code)
+\item 
+void \mbox{\hyperlink{smtp_8c_a7dac6734700fd5fedfdf4deecd8f41ae}{analyze\+\_\+smtp}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet SMTP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{smtp_8c_a023ce1184a44c87f1a43765ab82eea80}{verbose\+\_\+level}}
+\item 
+const char $\ast$ \mbox{\hyperlink{smtp_8c_a7ff18464e4b205a71349350d73466d10}{smtp\+\_\+commands}} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{structsmtp__response}{smtp\+\_\+response}} \mbox{\hyperlink{smtp_8c_a7f4411489efc84eb3e02b60766dca9f8}{smtp\+\_\+responses}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{smtp_8c_a7dac6734700fd5fedfdf4deecd8f41ae}\label{smtp_8c_a7dac6734700fd5fedfdf4deecd8f41ae}} 
+\index{smtp.c@{smtp.c}!analyze\_smtp@{analyze\_smtp}}
+\index{analyze\_smtp@{analyze\_smtp}!smtp.c@{smtp.c}}
+\doxysubsubsection{\texorpdfstring{analyze\_smtp()}{analyze\_smtp()}}
+{\footnotesize\ttfamily void analyze\+\_\+smtp (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet SMTP et affiche ses informations. 
+
+Cette fonction parcourt le paquet SMTP et affiche les commandes et les réponses trouvées. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet SMTP à analyser. \\
+\hline
+{\em length} & La longueur du paquet SMTP. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{smtp_8c_a5b80919539ee0fa26991a294c70458cf}\label{smtp_8c_a5b80919539ee0fa26991a294c70458cf}} 
+\index{smtp.c@{smtp.c}!contains\_smtp\_command@{contains\_smtp\_command}}
+\index{contains\_smtp\_command@{contains\_smtp\_command}!smtp.c@{smtp.c}}
+\doxysubsubsection{\texorpdfstring{contains\_smtp\_command()}{contains\_smtp\_command()}}
+{\footnotesize\ttfamily int contains\+\_\+smtp\+\_\+command (\begin{DoxyParamCaption}\item[{const char $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Vérifie si un paquet contient une commande SMTP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet à vérifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 si une commande SMTP est trouvée, 0 sinon. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{smtp_8c_a64cedd96e6926a58169e94037f962221}\label{smtp_8c_a64cedd96e6926a58169e94037f962221}} 
+\index{smtp.c@{smtp.c}!get\_smtp\_response\_desc@{get\_smtp\_response\_desc}}
+\index{get\_smtp\_response\_desc@{get\_smtp\_response\_desc}!smtp.c@{smtp.c}}
+\doxysubsubsection{\texorpdfstring{get\_smtp\_response\_desc()}{get\_smtp\_response\_desc()}}
+{\footnotesize\ttfamily const char$\ast$ get\+\_\+smtp\+\_\+response\+\_\+desc (\begin{DoxyParamCaption}\item[{int}]{code }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{smtp_8c_a7ff18464e4b205a71349350d73466d10}\label{smtp_8c_a7ff18464e4b205a71349350d73466d10}} 
+\index{smtp.c@{smtp.c}!smtp\_commands@{smtp\_commands}}
+\index{smtp\_commands@{smtp\_commands}!smtp.c@{smtp.c}}
+\doxysubsubsection{\texorpdfstring{smtp\_commands}{smtp\_commands}}
+{\footnotesize\ttfamily const char$\ast$ smtp\+\_\+commands\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}HELO"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}EHLO"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}MAIL FROM:"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}RCPT TO:"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}DATA"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}RSET"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}VRFY"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}EXPN"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}HELP"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}NOOP"{}},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}QUIT"{}}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp_8c_a7f4411489efc84eb3e02b60766dca9f8}\label{smtp_8c_a7f4411489efc84eb3e02b60766dca9f8}} 
+\index{smtp.c@{smtp.c}!smtp\_responses@{smtp\_responses}}
+\index{smtp\_responses@{smtp\_responses}!smtp.c@{smtp.c}}
+\doxysubsubsection{\texorpdfstring{smtp\_responses}{smtp\_responses}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structsmtp__response}{smtp\+\_\+response}} smtp\+\_\+responses\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \{220, \textcolor{stringliteral}{"{}Service ready"{}}\},}
+\DoxyCodeLine{    \{250, \textcolor{stringliteral}{"{}Requested mail action okay, completed"{}}\},}
+\DoxyCodeLine{    \{354, \textcolor{stringliteral}{"{}Start mail input; end with <CRLF>.<CRLF>"{}}\},}
+\DoxyCodeLine{    \{421, \textcolor{stringliteral}{"{}Service not available, closing transmission channel"{}}\},}
+\DoxyCodeLine{    \{450, \textcolor{stringliteral}{"{}Requested mail action not taken: mailbox unavailable"{}}\},}
+\DoxyCodeLine{    \{550, \textcolor{stringliteral}{"{}Requested action not taken: mailbox unavailable"{}}\},}
+\DoxyCodeLine{    \{0, NULL\} }
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{smtp_8c_a023ce1184a44c87f1a43765ab82eea80}\label{smtp_8c_a023ce1184a44c87f1a43765ab82eea80}} 
+\index{smtp.c@{smtp.c}!verbose\_level@{verbose\_level}}
+\index{verbose\_level@{verbose\_level}!smtp.c@{smtp.c}}
+\doxysubsubsection{\texorpdfstring{verbose\_level}{verbose\_level}}
+{\footnotesize\ttfamily int verbose\+\_\+level\hspace{0.3cm}{\ttfamily [extern]}}
+

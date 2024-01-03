@@ -1,0 +1,148 @@
+\hypertarget{packet__capture_8c}{}\doxysection{src/packet\+\_\+capture.c File Reference}
+\label{packet__capture_8c}\index{src/packet\_capture.c@{src/packet\_capture.c}}
+{\ttfamily \#include \char`\"{}../include/packet\+\_\+capture.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/ethernet.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$pcap.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for packet\+\_\+capture.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{packet__capture_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{packet__capture_8c_ae4e2e6b919474d09e09e997740535366}{open\+\_\+output\+\_\+file}} (const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Ouvre un fichier de sortie pour enregistrer les paquets capturés. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{packet__capture_8c_a7a4f5a7dd803948f7d16fcbb92786aec}{close\+\_\+output\+\_\+file}} ()
+\begin{DoxyCompactList}\small\item\em Ferme le fichier de sortie utilisé pour enregistrer les paquets. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{packet__capture_8c_a039ca225e8f928cc0a2d82211892393b}{start\+\_\+packet\+\_\+capture}} (char $\ast$device)
+\begin{DoxyCompactList}\small\item\em Démarre la capture de paquets sur un périphérique réseau spécifié. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{packet__capture_8c_a8bfc90b3fb9344e9caafec953baacc0b}{handle\+\_\+sigint}} (int sig)
+\begin{DoxyCompactList}\small\item\em Gestionnaire de signal pour SIGINT. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{packet__capture_8c_a2403794bd043a246d7e8863122ac5ba6}{packet\+\_\+handler}} (unsigned char $\ast$user\+\_\+data, const struct pcap\+\_\+pkthdr $\ast$pkthdr, const unsigned char $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Fonction de gestion des paquets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+FILE $\ast$ \mbox{\hyperlink{packet__capture_8c_a2960eb597f48f3b59bbb850b47e895ff}{output\+\_\+file}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{packet__capture_8c_a7a4f5a7dd803948f7d16fcbb92786aec}\label{packet__capture_8c_a7a4f5a7dd803948f7d16fcbb92786aec}} 
+\index{packet\_capture.c@{packet\_capture.c}!close\_output\_file@{close\_output\_file}}
+\index{close\_output\_file@{close\_output\_file}!packet\_capture.c@{packet\_capture.c}}
+\doxysubsubsection{\texorpdfstring{close\_output\_file()}{close\_output\_file()}}
+{\footnotesize\ttfamily void close\+\_\+output\+\_\+file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ferme le fichier de sortie utilisé pour enregistrer les paquets. 
+
+Ferme le fichier de sortie de paquets capturés.
+
+Cette fonction ferme le fichier ouvert par open\+\_\+output\+\_\+file. Si la fermeture échoue, un message d\textquotesingle{}erreur est affiché. \mbox{\Hypertarget{packet__capture_8c_a8bfc90b3fb9344e9caafec953baacc0b}\label{packet__capture_8c_a8bfc90b3fb9344e9caafec953baacc0b}} 
+\index{packet\_capture.c@{packet\_capture.c}!handle\_sigint@{handle\_sigint}}
+\index{handle\_sigint@{handle\_sigint}!packet\_capture.c@{packet\_capture.c}}
+\doxysubsubsection{\texorpdfstring{handle\_sigint()}{handle\_sigint()}}
+{\footnotesize\ttfamily void handle\+\_\+sigint (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+Gestionnaire de signal pour SIGINT. 
+
+Gère le signal d\textquotesingle{}interruption (SIGINT) pour terminer proprement la capture.
+
+Cette fonction est appelée lorsque le signal SIGINT est reçu. Elle affiche un message indiquant la fin de l\textquotesingle{}analyse et quitte le programme.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sig} & Le numéro du signal.\\
+\hline
+\end{DoxyParams}
+Signal handler for SIGINT.
+
+This function is called when the SIGINT signal is received. It prints a message indicating the end of the analysis and exits the program.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sig} & The signal number. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{packet__capture_8c_ae4e2e6b919474d09e09e997740535366}\label{packet__capture_8c_ae4e2e6b919474d09e09e997740535366}} 
+\index{packet\_capture.c@{packet\_capture.c}!open\_output\_file@{open\_output\_file}}
+\index{open\_output\_file@{open\_output\_file}!packet\_capture.c@{packet\_capture.c}}
+\doxysubsubsection{\texorpdfstring{open\_output\_file()}{open\_output\_file()}}
+{\footnotesize\ttfamily void open\+\_\+output\+\_\+file (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Ouvre un fichier de sortie pour enregistrer les paquets capturés. 
+
+Ouvre un fichier pour écrire les données de paquets capturés.
+
+Cette fonction ouvre un fichier pour écrire les données des paquets. Si aucun nom n\textquotesingle{}est fourni, un nom par défaut est utilisé.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Le nom du fichier à ouvrir ou NULL pour utiliser un nom par défaut. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{packet__capture_8c_a2403794bd043a246d7e8863122ac5ba6}\label{packet__capture_8c_a2403794bd043a246d7e8863122ac5ba6}} 
+\index{packet\_capture.c@{packet\_capture.c}!packet\_handler@{packet\_handler}}
+\index{packet\_handler@{packet\_handler}!packet\_capture.c@{packet\_capture.c}}
+\doxysubsubsection{\texorpdfstring{packet\_handler()}{packet\_handler()}}
+{\footnotesize\ttfamily void packet\+\_\+handler (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{user\+\_\+data,  }\item[{const struct pcap\+\_\+pkthdr $\ast$}]{pkthdr,  }\item[{const unsigned char $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Fonction de gestion des paquets. 
+
+Gère les paquets capturés.
+
+Cette fonction est appelée pour chaque paquet capturé. Elle affiche des informations sur le paquet, appelle la fonction d\textquotesingle{}analyse Ethernet et affiche les données du paquet.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+\_\+data} & Pointeur vers des données définies par l\textquotesingle{}utilisateur (non utilisées dans cette fonction). \\
+\hline
+{\em pkthdr} & Pointeur vers la structure d\textquotesingle{}en-\/tête du paquet. \\
+\hline
+{\em packet} & Pointeur vers les données du paquet. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{packet__capture_8c_a039ca225e8f928cc0a2d82211892393b}\label{packet__capture_8c_a039ca225e8f928cc0a2d82211892393b}} 
+\index{packet\_capture.c@{packet\_capture.c}!start\_packet\_capture@{start\_packet\_capture}}
+\index{start\_packet\_capture@{start\_packet\_capture}!packet\_capture.c@{packet\_capture.c}}
+\doxysubsubsection{\texorpdfstring{start\_packet\_capture()}{start\_packet\_capture()}}
+{\footnotesize\ttfamily void start\+\_\+packet\+\_\+capture (\begin{DoxyParamCaption}\item[{char $\ast$}]{device }\end{DoxyParamCaption})}
+
+
+
+Démarre la capture de paquets sur un périphérique réseau spécifié. 
+
+Démarre la capture de paquets sur un périphérique réseau.
+
+Ouvre l\textquotesingle{}interface réseau pour la capture en mode promiscuité, définit un gestionnaire de signal pour SIGINT, et démarre la boucle de capture avec pcap\+\_\+loop.
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Le nom du périphérique réseau sur lequel écouter. Fonction pour démarrer la capture de paquets.\\
+\hline
+{\em device} & Le nom de l\textquotesingle{}interface réseau à utiliser pour la capture. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{packet__capture_8c_a2960eb597f48f3b59bbb850b47e895ff}\label{packet__capture_8c_a2960eb597f48f3b59bbb850b47e895ff}} 
+\index{packet\_capture.c@{packet\_capture.c}!output\_file@{output\_file}}
+\index{output\_file@{output\_file}!packet\_capture.c@{packet\_capture.c}}
+\doxysubsubsection{\texorpdfstring{output\_file}{output\_file}}
+{\footnotesize\ttfamily FILE$\ast$ output\+\_\+file}
+

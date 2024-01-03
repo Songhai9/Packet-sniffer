@@ -1,0 +1,63 @@
+\hypertarget{tcp_8h}{}\doxysection{include/tcp.h File Reference}
+\label{tcp_8h}\index{include/tcp.h@{include/tcp.h}}
+
+
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets TCP.  
+
+
+{\ttfamily \#include $<$netinet/tcp.\+h$>$}\newline
+Include dependency graph for tcp.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{tcp_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{tcp_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{tcp_8h_ac771e7e818bacea61e00b059a0fa3d20}{analyze\+\_\+tcp}} (const unsigned char $\ast$packet, int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet TCP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets TCP. 
+
+Ce fichier contient la déclaration de la fonction pour analyser les paquets TCP. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tcp_8h_ac771e7e818bacea61e00b059a0fa3d20}\label{tcp_8h_ac771e7e818bacea61e00b059a0fa3d20}} 
+\index{tcp.h@{tcp.h}!analyze\_tcp@{analyze\_tcp}}
+\index{analyze\_tcp@{analyze\_tcp}!tcp.h@{tcp.h}}
+\doxysubsubsection{\texorpdfstring{analyze\_tcp()}{analyze\_tcp()}}
+{\footnotesize\ttfamily void analyze\+\_\+tcp (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet TCP et affiche ses informations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet TCP à analyser. \\
+\hline
+{\em length} & La longueur du paquet TCP.\\
+\hline
+\end{DoxyParams}
+Cette fonction extrait et affiche les détails du paquet TCP, tels que les ports source et destination. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet TCP à analyser. \\
+\hline
+{\em length} & La longueur du paquet TCP. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,63 @@
+\hypertarget{imap_8h}{}\doxysection{include/applications/imap.h File Reference}
+\label{imap_8h}\index{include/applications/imap.h@{include/applications/imap.h}}
+
+
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets IMAP.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for imap.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{imap_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{imap_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{imap_8h_a282767acaff3128c6e5f4be2578bab35}{analyze\+\_\+imap}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet IMAP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets IMAP. 
+
+Ce fichier contient la déclaration de la fonction pour analyser les paquets IMAP. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{imap_8h_a282767acaff3128c6e5f4be2578bab35}\label{imap_8h_a282767acaff3128c6e5f4be2578bab35}} 
+\index{imap.h@{imap.h}!analyze\_imap@{analyze\_imap}}
+\index{analyze\_imap@{analyze\_imap}!imap.h@{imap.h}}
+\doxysubsubsection{\texorpdfstring{analyze\_imap()}{analyze\_imap()}}
+{\footnotesize\ttfamily void analyze\+\_\+imap (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet IMAP et affiche ses informations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet IMAP à analyser. \\
+\hline
+{\em length} & La longueur du paquet IMAP.\\
+\hline
+\end{DoxyParams}
+Cette fonction parcourt le paquet IMAP et affiche les commandes et réponses trouvées. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet IMAP à analyser. \\
+\hline
+{\em length} & La longueur du paquet IMAP. \\
+\hline
+\end{DoxyParams}

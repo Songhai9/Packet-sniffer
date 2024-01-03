@@ -7,7 +7,7 @@ SRCDIR = src
 INCDIR = include
 APPDIR = src/applications
 
-_OBJS = main.o packet_capture.o ethernet.o ip.o arp.o tcp.o udp.o icmp.o dns.o http.o ftp.o smtp.o pop.o imap.o ldap.o sctp.o telnet.o bootp.o
+_OBJS = main.o packet_capture.o ethernet.o ip.o arp.o tcp.o udp.o icmp.o dns.o http.o ftp.o smtp.o pop.o imap.o ldap.o telnet.o bootp.o
 OBJS = $(patsubst %,$(OBJDIR)/%,$(_OBJS))
 
 all: directories $(BINDIR)/packet_analyzer
@@ -30,6 +30,9 @@ $(OBJDIR)/%.o: $(APPDIR)/%.c
 	$(CC) $(CFLAGS) -I$(INCDIR) -I$(INCDIR)/applications -c $< -o $@
 
 clean:
-	rm -rf $(OBJDIR) $(BINDIR) *~ core $(INCDIR)/*~ *.txt
+	rm -rf $(OBJDIR)/* $(BINDIR)/* *~ core $(INCDIR)/*~ *.txt
+
+clean-docs:
+	rm -rf $(OBJDIR) $(BINDIR) docs/* *~ core $(INCDIR)/*~ *.txt
 
 .PHONY: all clean directories

@@ -1,0 +1,54 @@
+\hypertarget{dns_8c}{}\doxysection{src/applications/dns.c File Reference}
+\label{dns_8c}\index{src/applications/dns.c@{src/applications/dns.c}}
+{\ttfamily \#include \char`\"{}../../include/applications/dns.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+Include dependency graph for dns.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dns_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{dns_8c_a90eaa9e750f79757a6bd9b53b5a21e44}{analyze\+\_\+dns}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet DNS et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{dns_8c_a023ce1184a44c87f1a43765ab82eea80}{verbose\+\_\+level}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{dns_8c_a90eaa9e750f79757a6bd9b53b5a21e44}\label{dns_8c_a90eaa9e750f79757a6bd9b53b5a21e44}} 
+\index{dns.c@{dns.c}!analyze\_dns@{analyze\_dns}}
+\index{analyze\_dns@{analyze\_dns}!dns.c@{dns.c}}
+\doxysubsubsection{\texorpdfstring{analyze\_dns()}{analyze\_dns()}}
+{\footnotesize\ttfamily void analyze\+\_\+dns (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet DNS et affiche ses informations. 
+
+Cette fonction extrait et affiche les détails de l\textquotesingle{}en-\/tête DNS, tels que l\textquotesingle{}ID, le nombre de questions, et le nombre de réponses. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet DNS à analyser. \\
+\hline
+{\em length} & La longueur du paquet DNS. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{dns_8c_a023ce1184a44c87f1a43765ab82eea80}\label{dns_8c_a023ce1184a44c87f1a43765ab82eea80}} 
+\index{dns.c@{dns.c}!verbose\_level@{verbose\_level}}
+\index{verbose\_level@{verbose\_level}!dns.c@{dns.c}}
+\doxysubsubsection{\texorpdfstring{verbose\_level}{verbose\_level}}
+{\footnotesize\ttfamily int verbose\+\_\+level\hspace{0.3cm}{\ttfamily [extern]}}
+

@@ -31,6 +31,8 @@ void analyze_imap(const unsigned char *packet, unsigned int length)
     { // Recherche d'un tag de commande typique dans IMAP
         if (verbose_level >= 2)
         {
+            if (verbose_level == 3)
+                printf("****************** IMAP Packet ******************\n");
             printf("IMAP Command: %s\n", buffer);
         }
         else
@@ -40,6 +42,8 @@ void analyze_imap(const unsigned char *packet, unsigned int length)
     }
     else
     {
+        if (verbose_level == 3)
+                printf("****************** IMAP Packet ******************\n");
         // Analyse basique des réponses - OK, NO, BAD
         if (strstr(buffer, "OK") != NULL)
         {

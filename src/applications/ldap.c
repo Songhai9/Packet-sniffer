@@ -62,6 +62,8 @@ void analyze_ldap(const unsigned char *packet, unsigned int length)
     {
         if (verbose_level >= 2)
         {
+            if (verbose_level == 3)
+                printf("****************** LDAP Packet ******************\n");
             printf("LDAP Operation: ");
             for (unsigned int i = 0; i < operation_end; i++)
             {

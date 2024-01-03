@@ -1,0 +1,9 @@
+<map id="src/packet_capture.c" name="src/packet_capture.c">
+<area shape="rect" id="node1" title=" " alt="" coords="275,5,430,32"/>
+<area shape="rect" id="node2" href="$packet__capture_8h.html" title="Fichier d&#39;en&#45;tête pour la capture de paquets réseau." alt="" coords="5,80,201,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="133,155,199,181"/>
+<area shape="rect" id="node4" href="$ethernet_8h.html" title="Fichier d&#39;en&#45;tête pour le traitement des trames Ethernet." alt="" coords="277,80,429,107"/>
+<area shape="rect" id="node6" title=" " alt="" coords="453,80,527,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="551,80,621,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="286,155,419,181"/>
+</map>

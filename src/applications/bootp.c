@@ -1,19 +1,18 @@
 #include "../../include/applications/bootp.h"
 #include <stdio.h>
-#include <arpa/inet.h> // For ntohl() and ntohs() functions
-#include <string.h>    // For strlen() function
+#include <arpa/inet.h>
+#include <string.h> 
 
 extern int verbose_level;
 
 // Prototype de la nouvelle fonction pour lire les options DHCP
 void read_dhcp_options(const unsigned char *options, int length);
 
-
 /**
  * @brief Affiche tous les octets d'un paquet BOOTP et les options DHCP s'il y en a.
- * 
+ *
  * Cette fonction parcourt le paquet BOOTP/DHCP, affiche les détails de base et extrait les options DHCP.
- * 
+ *
  * @param packet Le paquet BOOTP/DHCP à analyser.
  * @param length La longueur du paquet.
  * @param options Un tableau pour stocker les options extraites.
@@ -23,9 +22,9 @@ unsigned char *print_bootp_packet(const unsigned char *packet, unsigned int leng
 {
     unsigned int i = 0;
     unsigned int magic_cookie_index = 0;
-    unsigned char magic_cookie[] = {0x63, 0x82, 0x53, 0x63}; // Magic cookie sequence
+    unsigned char magic_cookie[] = {0x63, 0x82, 0x53, 0x63}; // Magic cookie
 
-    // Find the index of the magic cookie sequence
+    // Trouver l'index du magic cookie
     while (i < length - sizeof(magic_cookie))
     {
         if (memcmp(packet + i, magic_cookie, sizeof(magic_cookie)) == 0)
@@ -36,11 +35,10 @@ unsigned char *print_bootp_packet(const unsigned char *packet, unsigned int leng
         i++;
     }
 
-    // Copy the bytes after the magic cookie to the end of the packet into the options array
     unsigned int options_length = length - magic_cookie_index - sizeof(magic_cookie);
     memcpy(options, packet + magic_cookie_index + sizeof(magic_cookie), options_length);
 
-    // Print the hexadecimal bytes
+    // Affichage des détails de base du paquet BOOTP/DHCP
     /* for (unsigned int j = 0; j < options_length; j++) {
         printf("%02x ", options[j]);
     }
@@ -51,9 +49,9 @@ unsigned char *print_bootp_packet(const unsigned char *packet, unsigned int leng
 
 /**
  * @brief Affiche une adresse MAC.
- * 
+ *
  * Cette fonction affiche une adresse MAC au format XX:XX:XX:XX:XX:XX.
- * 
+ *
  * @param mac L'adresse MAC à afficher.
  */
 void print_mac_address(const uint8_t *mac)
@@ -64,10 +62,10 @@ void print_mac_address(const uint8_t *mac)
 
 /**
  * @brief Analyse un paquet BOOTP/DHCP et affiche ses informations.
- * 
+ *
  * Cette fonction décompose le paquet BOOTP/DHCP et affiche ses composants principaux,
  * tels que les adresses MAC source et destination, ainsi que le type de protocole.
- * 
+ *
  * @param packet Le paquet BOOTP/DHCP à analyser.
  * @param length La longueur du paquet BOOTP/DHCP.
  */
@@ -146,9 +144,9 @@ void analyze_dhcp(const unsigned char *packet, unsigned int length)
 
 /**
  * @brief Lit les options DHCP et affiche leurs informations.
- * 
+ *
  * Cette fonction parcourt le tableau d'options DHCP et affiche les détails de chaque option.
- * 
+ *
  * @param options Le tableau d'options DHCP à analyser.
  * @param length La longueur du tableau d'options DHCP.
  */

@@ -90,6 +90,8 @@ void analyze_ftp(const unsigned char *packet, unsigned int length)
         {
             if (verbose_level >= 2)
             {
+                if (verbose_level == 3)
+                    printf("****************** SMTP Packet ******************\n");
                 printf("FTP Command: %s\n", buffer);
             }
             else
@@ -99,6 +101,8 @@ void analyze_ftp(const unsigned char *packet, unsigned int length)
         }
         else
         {
+            if (verbose_level == 3)
+                printf("****************** SMTP Packet ******************\n");
             int response_code = strtol(buffer, NULL, 10);
             if (response_code > 0)
                 printf("FTP Response: %d %s\n", response_code, get_ftp_response_desc(response_code));

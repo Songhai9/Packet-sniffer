@@ -1,0 +1,63 @@
+\hypertarget{pop_8h}{}\doxysection{include/applications/pop.h File Reference}
+\label{pop_8h}\index{include/applications/pop.h@{include/applications/pop.h}}
+
+
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets POP.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for pop.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{pop_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{pop_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pop_8h_a4e9c5ff5f49fcaf1f6a8dacfc1463884}{analyze\+\_\+pop}} (const unsigned char $\ast$packet, unsigned int length)
+\begin{DoxyCompactList}\small\item\em Analyse un paquet POP et affiche ses informations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier d\textquotesingle{}en-\/tête pour le traitement des paquets POP. 
+
+Ce fichier contient la déclaration de la fonction pour analyser les paquets POP. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{pop_8h_a4e9c5ff5f49fcaf1f6a8dacfc1463884}\label{pop_8h_a4e9c5ff5f49fcaf1f6a8dacfc1463884}} 
+\index{pop.h@{pop.h}!analyze\_pop@{analyze\_pop}}
+\index{analyze\_pop@{analyze\_pop}!pop.h@{pop.h}}
+\doxysubsubsection{\texorpdfstring{analyze\_pop()}{analyze\_pop()}}
+{\footnotesize\ttfamily void analyze\+\_\+pop (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{packet,  }\item[{unsigned int}]{length }\end{DoxyParamCaption})}
+
+
+
+Analyse un paquet POP et affiche ses informations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet POP à analyser. \\
+\hline
+{\em length} & La longueur du paquet POP.\\
+\hline
+\end{DoxyParams}
+Cette fonction parcourt le paquet POP et affiche les commandes et réponses trouvées. Elle adapte l\textquotesingle{}affichage en fonction du niveau de verbosité défini.
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Le paquet POP à analyser. \\
+\hline
+{\em length} & La longueur du paquet POP. \\
+\hline
+\end{DoxyParams}

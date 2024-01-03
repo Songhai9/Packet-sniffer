@@ -58,6 +58,8 @@ void analyze_pop(const unsigned char *packet, unsigned int length)
     {
         if (contains_pop_command(buffer))
         {
+            if (verbose_level == 3)
+                printf("****************** POP Packet ******************\n");
             if (verbose_level >= 2)
             {
                 printf("POP Command: %s\n", buffer);
@@ -69,6 +71,8 @@ void analyze_pop(const unsigned char *packet, unsigned int length)
         }
         else
         {
+            if (verbose_level == 3)
+                printf("****************** POP Packet ******************\n");
             // Traitement des réponses POP (commençant par +OK ou -ERR)
             if (strncmp(buffer, "+OK", 3) == 0 || strncmp(buffer, "-ERR", 4) == 0)
             {
