@@ -39,41 +39,6 @@ Legend:
 
 ---
 
-## 📂 Project Structure
-
-network-analyzer/
-│
-├── src/                  # Folder containing source files (.c)
-│   ├── main.c            # Main entry point, argument handling
-│   ├── ethernet.c        # Ethernet frame handling
-│   ├── ip.c              # IP protocol handling
-│   ├── arp.c             # ARP protocol handling
-│   ├── icmp.c            # ICMP protocol handling
-│   ├── tcp.c             # TCP protocol handling
-│   ├── udp.c             # UDP protocol handling
-│   └── application_protocols/
-│       ├── dhcp.c        # DHCP protocol handling
-│       ├── dns.c         # DNS protocol handling
-│       ├── http.c        # HTTP protocol handling
-│       └── …
-│
-├── include/              # Folder containing header files (.h)
-│   ├── ethernet.h
-│   ├── ip.h
-│   ├── arp.h
-│   ├── icmp.h
-│   ├── tcp.h
-│   ├── udp.h
-│   └── application_protocols/
-│       ├── dhcp.h
-│       ├── dns.h
-│       ├── http.h
-│       └── …
-│
-└── Makefile              # Makefile for compilation
-
----
-
 ## 📖 Project Description
 
 ### 🔍 Network Analyzer
