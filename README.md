@@ -1,87 +1,114 @@
-------------------------------------------------------- TODO ------------------------------------------------------------
-✅ = Testé et fonctionnel 🟨 = Pas testé, fonctionnel 🟥 = Testé, non fonctionnel
+# 📡 Network Analyzer [School Project]
 
-CAPTURE
+## ✅ TODO List
+
+Legend:
+- ✅ = Tested and functional
+- 🟨 = Not tested, functional
+- 🟥 = Tested, not functional
+
+### 🏷️ Capture
 - [x] Packet capture ✅
 
-ANALYSIS
---> PROTOCOLS
-    - [x] Ethernet ✅
-    - [x] IPv4 ✅
-    - [x] IPv6 ✅
-    - [x] UDP ✅
-    - [x] TCP ✅
-    - [x] ARP ✅
-    - [x] ICMP ✅
---> APPLICATIONS
-    - [x] DHCP ✅
-    - [x] DNS ✅
-    - [x] HTTP ✅
-    - [x] FTP ✅
-    - [x] SMTP ✅ ~
-    - [x] Telnet ✅
-    - [x] LDAP ✅ ~
-    - [x] POP ✅
-    - [x] IMAP ✅ ~
+### 📊 Analysis
+#### 📌 Protocols
+- [x] Ethernet ✅
+- [x] IPv4 ✅
+- [x] IPv6 ✅
+- [x] UDP ✅
+- [x] TCP ✅
+- [x] ARP ✅
+- [x] ICMP ✅
 
-OPTIONS
-- [x] -i ✅
-- [x] -o ✅
-- [] -f
-- [x] -v ✅
+#### 🌐 Applications
+- [x] DHCP ✅
+- [x] DNS ✅
+- [x] HTTP ✅
+- [x] FTP ✅
+- [x] SMTP ✅ ~
+- [x] Telnet ✅
+- [x] LDAP ✅ ~
+- [x] POP ✅
+- [x] IMAP ✅ ~
 
+### ⚙️ Options
+- [x] `-i` ✅
+- [x] `-o` ✅
+- [ ] `-f`
+- [x] `-v` ✅
 
+---
 
-------------------------------------------------------- STRUCTURE -------------------------------------------------------
+## 📂 Project Structure
 
-analyseur-reseau/
+network-analyzer/
 │
-├── src/                  # Dossier contenant les fichiers source (.c)
-│   ├── main.c            # Point d'entrée principal, gestion des arguments
-│   ├── ethernet.c        # Gestion des trames Ethernet
-│   ├── ip.c              # Gestion du protocole IP
-│   ├── arp.c             # Gestion du protocole ARP
-│   ├── icmp.c            # Gestion du protocole ICMP
-│   ├── tcp.c             # Gestion du protocole TCP
-│   ├── udp.c             # Gestion du protocole UDP
-│   └── protocols_applicatifs/
-│       ├── dhcp.c        # Gestion du protocole DHCP
-│       ├── dns.c         # Gestion du protocole DNS
-│       ├── http.c        # Gestion du protocole HTTP
-│       └── ...
+├── src/                  # Folder containing source files (.c)
+│   ├── main.c            # Main entry point, argument handling
+│   ├── ethernet.c        # Ethernet frame handling
+│   ├── ip.c              # IP protocol handling
+│   ├── arp.c             # ARP protocol handling
+│   ├── icmp.c            # ICMP protocol handling
+│   ├── tcp.c             # TCP protocol handling
+│   ├── udp.c             # UDP protocol handling
+│   └── application_protocols/
+│       ├── dhcp.c        # DHCP protocol handling
+│       ├── dns.c         # DNS protocol handling
+│       ├── http.c        # HTTP protocol handling
+│       └── …
 │
-├── include/              # Dossier contenant les fichiers d'en-tête (.h)
+├── include/              # Folder containing header files (.h)
 │   ├── ethernet.h
 │   ├── ip.h
 │   ├── arp.h
 │   ├── icmp.h
 │   ├── tcp.h
 │   ├── udp.h
-│   └── protocols_applicatifs/
+│   └── application_protocols/
 │       ├── dhcp.h
 │       ├── dns.h
 │       ├── http.h
-│       └── ...
+│       └── …
 │
-└── Makefile              # Makefile pour la compilation
+└── Makefile              # Makefile for compilation
 
+---
 
------------------------------------------------------- DESCRIPTION ------------------------------------------------------
+## 📖 Project Description
 
-PROJET ANALYSEUR RÉSEAU :
+### 🔍 Network Analyzer
 
-Le code de ce projet implémente un analyseur réseau simple.
-Le Makefile pour compiler le code est fourni. Pour lancer le programme, il faut se rendre dans le dossier
-'bin'.
-Le programme a plusieurs modes de lancement :
-- Sans fichier contenant des captures, le programme lance une analyse de trames prédéterminés et affiche les résultats comme il le ferait en 
-temps normal. Initialement à but de test, il a été jugé pertinent de garder cet aspect, car il permet de montrer l'affichage de tous les protocoles pouvant être analysés par le programme.
-- Avec l'option '-v' pour gérer la verbosité des résultats affichés par le programme. Lorsque ce n'est pas précisé, la verbosité est au maximum (3) par défaut. Il y a trois modes de verbosité allant de 1 à 3. Cette option est compatible avec ou sans fichier contenant des captures donné en paramètre.
-- Avec l'option '-i [interface]', le programme analyse toutes les trames qui circulent par l'interface donné en paramètre. Il s'agit d'une analyse live.
-- Avec l'option '-o [output-file]', le programme analyse toutes les trames qui sont dans le fichier 'output-file'. Cette option est conçu pour que l'output file soit un fichier .pcap obtenu grâve à l'utilisation de tcpdump. Un dossier 'input', avec un fichier est fourni pour tester l'option, encore une fois initialement implémenter à des fins de test, il a tout de même été conservé. Il s'agit de l'analyse offline.
+This project implements a simple network analyzer.
 
-Peu importe le mode de lancement du programme, celui-ci ouvrira en plus un fichier 'trame.txt' contenant le contenu brut des trames. Les résultats seront affichés en ligne de commande.
+The `Makefile` is provided to compile the code. Once compiled, the executable can be found in the `bin/` directory.
 
-Une documentation Doxygen sur navigateur est disponible en exécutant la commande 'xdg-open index.html' dans le répertoire 'docs/html'. ('doxygen Doxyfile' pour la générer).
+### 🏃 Execution Modes
+The program can be executed in different ways:
 
-Les protocoles marqués d'un "~" sont des protocoles dont l'affichage est inconstant pour des raisons restées non identifiées. En effet, parfois des caractères parasites s'affichent.
+1. **Without a capture file**  
+   - It analyzes predefined frames and displays the results in a simulation mode.  
+   - This mode was initially created for testing but was retained as it demonstrates all the supported protocols.
+
+2. **With the `-v` option (verbosity)**  
+   - Controls the level of detail in the displayed results.  
+   - By default, verbosity is set to maximum (`3`).  
+   - Three levels are available (`1-3`).  
+   - Compatible with or without a capture file.
+
+3. **With the `-i [interface]` option (Live analysis)**  
+   - Captures and analyzes all frames passing through the specified interface.
+
+4. **With the `-o [output-file]` option (Offline analysis)**  
+   - Analyzes frames stored in a `.pcap` file (e.g., generated with `tcpdump`).  
+   - A test file is available in the `input/` directory.
+
+### 📜 Results
+- Results are displayed in the terminal.
+- A `trame.txt` file is generated containing the raw frame data.
+
+### 📚 Documentation
+A Doxygen-generated documentation is available. To generate and open it:
+
+```sh
+doxygen Doxyfile
+xdg-open docs/html/index.html
